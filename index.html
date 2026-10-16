@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArtDuZt | Arturo Díaz — Creative Developer</title>
+<meta name="description" content="Portafolio de Arturo Díaz: diseño web, branding y motion con actitud street.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Permanent+Marker&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily: { anton: ['Anton','Impact','sans-serif'], marker: ['"Permanent Marker"','cursive'], mono: ['"Space Mono"','monospace'] },
+  colors: { ink: '#050505', paper: '#f2f2f2' }
+}}}
+</script>
+<style>
+html {
+  scroll-behavior: auto;
+}
+body {
+  background: #050505;
+  color: #f2f2f2;
+  cursor: none;
+  overflow-x: hidden;
+}
+@media (pointer: coarse), (max-width: 767px) {
+  body {
+    cursor: auto;
+  }
+  .cursor {
+    display: none;
+  }
+}
+::selection {
+  background: #f2f2f2;
+  color: #050505;
+}
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 90;
+  opacity: .09;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation: grain 1s steps(6) infinite;
+}
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-4%, 3%); }
+  40% { transform: translate(3%, -5%); }
+  60% { transform: translate(-5%, -2%); }
+  80% { transform: translate(4%, 4%); }
+  100% { transform: translate(0, 0); }
+}
+.scan::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: repeating-linear-gradient(0deg, rgba(255, 255, 255, .04) 0 1px, transparent 1px 3px);
+}
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 200;
+  transform: translate(-50%, -50%);
+}
+.cursor.big {
+  width: 90px;
+  height: 90px;
+}
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.glitch::before {
+  color: #fff;
+  transform: translate(3px, 0);
+  clip-path: inset(0 0 60% 0);
+  animation: gl1 3s infinite steps(1);
+  mix-blend-mode: difference;
+}
+.glitch::after {
+  color: #888;
+  transform: translate(-3px, 0);
+  clip-path: inset(60% 0 0 0);
+  animation: gl2 2.4s infinite steps(1);
+}
+@keyframes gl1 {
+  0%, 88% { clip-path: inset(0 0 100% 0); }
+  90% { clip-path: inset(10% 0 60% 0); }
+  94% { clip-path: inset(50% 0 20% 0); }
+  98% { clip-path: inset(0 0 100% 0); }
+}
+@keyframes gl2 {
+  0%, 80% { clip-path: inset(100% 0 0 0); }
+  83% { clip-path: inset(70% 0 5% 0); }
+  90% { clip-path: inset(30% 0 40% 0); }
+  95%, 100% { clip-path: inset(100% 0 0 0); }
+}
+.outline-text {
+  -webkit-text-stroke: 2px #f2f2f2;
+  color: transparent;
+}
+.face {
+  filter: grayscale(1) contrast(1.35) brightness(.95);
+}
+.tape {
+  background: #f2f2f2;
+  color: #050505;
+}
+.row-hover:hover .row-title {
+  color: #050505;
+}
+.swiper-slide img {
+  filter: grayscale(1) contrast(1.2);
+  transition: .5s;
+}
+.swiper-slide:hover img {
+  filter: grayscale(0) contrast(1);
+  transform: scale(1.06);
+}
+.swiper-pagination-bullet {
+  background: #f2f2f2 !important;
+  opacity: .4;
+  border-radius: 0 !important;
+  width: 24px !important;
+  height: 4px !important;
+}
+.swiper-pagination-bullet-active {
+  opacity: 1;
+}
+.char {
+  display: inline-block;
+  will-change: transform;
+}
+.outline-ink {
+  -webkit-text-stroke: 2px #050505;
+  color: transparent;
+}
+.menu-link:hover .label,
+.menu-link.is-active .label {
+  -webkit-text-stroke: 2px #050505;
+  color: transparent;
+}
+.splat {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 210;
+}
+.scribble {
+  position: absolute;
+  overflow: visible;
+  pointer-events: none;
+}
+.scribble path {
+  fill: none;
+  stroke: #f2f2f2;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.drips i {
+  display: block;
+  width: 6px;
+  height: 100%;
+  background: #f2f2f2;
+  border-radius: 0 0 6px 6px;
+  transform-origin: top;
+}
+
+.drips i {
+  display: block;
+  width: 6px;
+  height: 100%;
+  background: #f2f2f2;
+  border-radius: 0 0 6px 6px;
+  transform-origin: top;
+}
+
+.blob {
+  position: relative;
+  aspect-ratio: 1;
+  will-change: transform;
+}
+
+.blob-in {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative; z-index: 1;
+  background: #f2f2f2; color: #050505;
+  padding: 8%;
+  background: #f2f2f2;
+  color: #050505;
+  border: 2px solid #f2f2f2;
+  border-radius: 58% 42% 55% 45% / 48% 56% 44% 52%;
+  cursor: none;
+  transition: background .25s, color .25s;
+}
+
+.blob:nth-child(3n) .blob-in {
+  background: transparent;
+  color: #f2f2f2;
+}
+
+.blob:nth-child(5n) .blob-in {
+  background: #0d0d0d;
+  color: #f2f2f2;
+}
+
+.blob-in:hover,
+.blob.is-on .blob-in {
+  background: #050505;
+  color: #f2f2f2;
+  -webkit-text-stroke: 0;
+}
+
+.blob-in b {
+  font-family: Anton, Impact, sans-serif;
+  text-transform: uppercase;
+  line-height: .95;
+  font-weight: 400;
+  font-size: clamp(.8rem, 2.2vw, 1.7rem);
+}
+
+.blob-in small {
+  font-size: clamp(7px, .8vw, 11px);
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  opacity: .7;
+  margin-top: 4px;
+}
+
+.chip.is-active {
+  background: #f2f2f2;
+  color: #050505;
+}
+
+.trail {
+  position: absolute; left: 50%; top: 50%;
+  width: 10px; margin-left: -5px; height: 0;
+  background: #f2f2f2; border-radius: 0 0 8px 8px;
+  transform-origin: 50% 0; pointer-events: none; z-index: 0;
+}
+.blob-in b, .blob-in small { opacity: 0; }
+
+p.font-marker.hero-fade {
+  text-shadow: 0 0 6px rgba(255, 255, 255, .55), 0 0 18px rgba(255, 255, 255, .25);
+}
+
+.glitch::before, .glitch::after { animation-play-state: paused; }
+.glitch.live::before, .glitch.live::after { animation-play-state: running;}
+
+@media (max-width: 767px) {
+  .blob-in small { display: none; }
+}
+</style>
+</head>
+<body class="grain font-mono antialiased">
+<div id="preloader" class="fixed inset-0 z-[150] bg-paper text-ink flex flex-col justify-between p-6 md:p-10">
+  <div class="flex justify-between text-xs uppercase tracking-widest"><span>ArtDuZt_OS v2.6</span><span>Booting...</span></div>
+  <div class="font-anton leading-none text-[28vw] md:text-[20vw]"><span id="count">0</span><span class="text-[10vw]">%</span></div>
+  <div class="h-1 bg-ink/20"><div id="bar" class="h-full w-0 bg-ink"></div></div>
+</div>
+<div class="cursor" id="cursor"></div>
+<div class="fixed top-0 left-0 h-1 bg-paper z-[120] origin-left scale-x-0" id="progress" style="width: 100%"></div>
+<header class="fixed top-0 inset-x-0 z-[130] flex items-center justify-between px-5 md:px-10 py-5 mix-blend-difference text-white">
+  <a href="#home" class="font-anton text-2xl tracking-wider">ArtDuZt</a>
+  <div class="flex items-center gap-4">
+    <a href="#contact" class="hidden md:inline-block text-xs uppercase tracking-widest border border-white px-4 py-2 hover:bg-white hover:text-black transition">Hire me</a>
+    <button id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu" class="w-12 h-12 border border-white flex flex-col items-center justify-center gap-[6px]">
+      <span class="burger-line block w-6 h-[2px] bg-white"></span><span class="burger-line block w-6 h-[2px] bg-white"></span>
+    </button>
+  </div>
+</header>
+<div id="menu" class="fixed inset-0 z-[125] bg-paper text-ink overflow-y-auto" aria-hidden="true">
+  <div class="min-h-full grid md:grid-cols-[1.25fr_1fr] gap-8 px-5 md:px-10 pt-28 pb-8">
+    <nav class="flex flex-col justify-center" aria-label="Principal">
+      <a href="#home" class="menu-link block overflow-hidden group"><span class="label flex items-baseline gap-4 font-anton uppercase text-[11vw] md:text-[5.2vw] leading-[1.02]"><sup class="font-mono text-xs tracking-widest">01</sup>Inicio</span></a>
+      <a href="#about" class="menu-link block overflow-hidden group"><span class="label flex items-baseline gap-4 font-anton uppercase text-[11vw] md:text-[5.2vw] leading-[1.02]"><sup class="font-mono text-xs tracking-widest">02</sup>Manifiesto</span></a>
+      <a href="#services" class="menu-link block overflow-hidden group"><span class="label flex items-baseline gap-4 font-anton uppercase text-[11vw] md:text-[5.2vw] leading-[1.02]"><sup class="font-mono text-xs tracking-widest">03</sup>Servicios</span></a>
+      <a href="#process" class="menu-link block overflow-hidden group"><span class="label flex items-baseline gap-4 font-anton uppercase text-[11vw] md:text-[5.2vw] leading-[1.02]"><sup class="font-mono text-xs tracking-widest">04</sup>Proceso</span></a>
+      <a href="#projects" class="menu-link block overflow-hidden group"><span class="label flex items-baseline gap-4 font-anton uppercase text-[11vw] md:text-[5.2vw] leading-[1.02]"><sup class="font-mono text-xs tracking-widest">05</sup>Proyectos</span></a>
+      <a href="#experience" class="menu-link block overflow-hidden group"><span class="label flex items-baseline gap-4 font-anton uppercase text-[11vw] md:text-[5.2vw] leading-[1.02]"><sup class="font-mono text-xs tracking-widest">06</sup>Experiencia</span></a>
+      <a href="#skills" class="menu-link block overflow-hidden group"><span class="label flex items-baseline gap-4 font-anton uppercase text-[11vw] md:text-[5.2vw] leading-[1.02]"><sup class="font-mono text-xs tracking-widest">07</sup>Habilidades</span></a>
+      <a href="#contact" class="menu-link block overflow-hidden group"><span class="label flex items-baseline gap-4 font-anton uppercase text-[11vw] md:text-[5.2vw] leading-[1.02]"><sup class="font-mono text-xs tracking-widest">07</sup>Contacto</span></a>
+    </nav>
+    <div class="hidden md:flex flex-col gap-4">
+      <div class="menu-extra relative flex-1 bg-ink overflow-hidden border-2 border-ink">
+        <img id="menuFace" src="https://artduzt-beep.github.io/cv_ArtDuZt/assets/img/arturw.png" alt="" class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[95%] w-auto max-w-none face">
+        <span class="absolute top-3 left-3 tape px-2 py-1 text-[10px] uppercase tracking-widest -rotate-2">Creative Developer</span>
+      </div>
+      <p class="menu-extra font-marker text-2xl -rotate-1">// diseño que se pinta en la pared</p>
+    </div>
+    <div class="menu-extra md:col-span-2 flex flex-wrap gap-x-8 gap-y-2 text-xs uppercase tracking-widest border-t border-ink/30 pt-4">
+      <a href="mailto:artduzt@gmail.com" class="hover:line-through">artduzt@gmail.com</a>
+      <a href="https://wa.me/+527228897198" target="_blank" rel="noopener noreferrer" class="hover:line-through">WhatsApp</a>
+      <a href="https://www.behance.net/arturodaz12" target="_blank" rel="noopener noreferrer" class="hover:line-through">Behance</a>
+    </div>
+  </div>
+</div>
+<main>
+<section id="home" class="relative min-h-[100svh] overflow-hidden scan flex items-start md:items-end">
+  <div id="heroGrid" class="absolute inset-x-0 -top-[20%] h-[140%] opacity-[.07]" style="background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 60px 60px"></div>
+  <div id="faceWrap" class="absolute right-0 bottom-0 w-full h-[46svh] md:right-[5%] md:w-auto md:h-[calc(100svh-100px)] z-[1]">
+    <img src="https://artduzt-beep.github.io/cv_ArtDuZt/assets/img/arturw.png" alt="Arturo Díaz" class="face relative block h-full w-full object-contain object-right-bottom md:w-auto md:max-w-none" id="face">
+    <img src="https://artduzt-beep.github.io/cv_ArtDuZt/assets/img/arturw.png" alt="" aria-hidden="true" class="face absolute inset-0 h-full w-full object-contain object-right-bottom opacity-30 mix-blend-difference" id="faceGhost" style="transform: translate(10px, 0)">
+  </div>
+  <div id="heroContent" class="relative z-[3] w-full px-5 md:px-10 pb-12 md:pb-20 pt-24 md:pt-28">
+    <p class="font-marker text-xl md:text-3xl -rotate-3 mb-2 hero-fade">// diseño que se pinta en la pared</p>
+    <h1 class="font-anton uppercase leading-[.82] text-[22vw] md:text-[17vw] mix-blend-difference" id="heroTitle">
+      <span class="block overflow-hidden"><span class="glitch" data-text="ARTURO">ARTURO</span></span>
+      <span class="block overflow-hidden outline-text md:ml-[8vw]"><span>DÍAZ.</span></span>
+    </h1>
+    <div class="mt-8 flex flex-wrap items-center gap-4 hero-fade">
+      <span class="tape px-3 py-1 text-xs uppercase tracking-widest rotate-[-2deg]">Web</span>
+      <span class="tape px-3 py-1 text-xs uppercase tracking-widest rotate-[2deg]">Branding</span>
+      <span class="tape px-3 py-1 text-xs uppercase tracking-widest rotate-[-1deg]">Motion</span>
+      <span class="text-xs uppercase tracking-widest opacity-70">+4.5 años rompiendo pantallas</span>
+    </div>
+    <div class="mt-8 flex flex-wrap gap-4 hero-fade">
+      <a href="#projects" class="mag bg-paper text-ink font-anton uppercase tracking-wider px-8 py-4 text-lg hover:bg-transparent hover:text-paper border border-paper transition">Ver proyectos</a>
+      <a href="tel:+527228897198" class="mag border border-paper bg-ink/70 md:bg-transparent font-anton uppercase tracking-wider px-8 py-4 text-lg hover:bg-paper hover:text-ink transition">Trabajemos</a>
+    </div>
+  </div>
+  <div class="hidden md:block absolute bottom-6 right-6 md:right-10 z-[3] text-[10px] uppercase tracking-[.3em] [writing-mode:vertical-rl] opacity-60">Scroll ↓</div>
+</section>
+<section class="bg-paper text-ink py-4 overflow-hidden -rotate-1 scale-105 border-y-4 border-ink">
+  <div class="flex whitespace-nowrap font-anton text-4xl md:text-6xl uppercase" id="marquee">
+    <div class="flex shrink-0 gap-10 pr-10"><span>Diseño Web</span><span>✕</span><span>Branding</span><span>✕</span><span>Motion</span><span>✕</span><span>Front-End</span><span>✕</span><span>Street Vibes</span><span>✕</span></div>
+    <div class="flex shrink-0 gap-10 pr-10"><span>Diseño Web</span><span>✕</span><span>Branding</span><span>✕</span><span>Motion</span><span>✕</span><span>Front-End</span><span>✕</span><span>Street Vibes</span><span>✕</span></div>
+  </div>
+</section>
+
+<section id="about" class="relative isolate overflow-hidden px-5 md:px-10 py-32 md:py-48">
+  <span aria-hidden="true" data-speed="-1.2" class="outline-text font-anton absolute -right-4 top-10 -z-10 select-none pointer-events-none text-[40vw] md:text-[28vw] leading-none opacity-20">STREET</span>
+  <p class="font-marker text-2xl md:text-4xl mb-8 -rotate-2" data-aos="fade-right">[ manifiesto ]</p>
+  <p id="manifesto" class="font-anton uppercase text-[9vw] md:text-[6vw] leading-[.95] max-w-6xl">
+    No hago páginas bonitas. Hago interfaces con actitud, marcas que se notan y animaciones que no se olvidan. Diseño, código y calle en el mismo layer.
+  </p>
+  <div id="stamp" class="inline-block mt-10 border-4 border-paper px-5 py-2 font-anton uppercase text-3xl md:text-5xl tracking-widest -rotate-6">100% Street · Sin filtros</div>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-paper/30 mt-24 border border-paper/30">
+    <div class="bg-ink p-6 md:p-10" data-aos="fade-up"><div class="font-anton text-6xl md:text-8xl" data-speed=".3"><span class="count" data-to="4">0</span>+</div><p class="text-xs uppercase tracking-widest mt-2 opacity-70">Años de experiencia</p></div>
+    <div class="bg-ink p-6 md:p-10" data-aos="fade-up" data-aos-delay="100"><div class="font-anton text-6xl md:text-8xl" data-speed="-.2"><span class="count" data-to="50">0</span>+</div><p class="text-xs uppercase tracking-widest mt-2 opacity-70">Landings & micrositios</p></div>
+    <div class="bg-ink p-6 md:p-10" data-aos="fade-up" data-aos-delay="200"><div class="font-anton text-6xl md:text-8xl" data-speed=".5"><span class="count" data-to="5">0</span></div><p class="text-xs uppercase tracking-widest mt-2 opacity-70">Marcas construidas</p></div>
+    <div class="bg-ink p-6 md:p-10" data-aos="fade-up" data-aos-delay="300"><div class="font-anton text-6xl md:text-8xl" data-speed="-.4">∞</div><p class="text-xs uppercase tracking-widest mt-2 opacity-70">Café & pixeles</p></div>
+  </div>
+</section>
+<section id="services" class="px-5 md:px-10 py-24">
+  <div class="relative flex items-end justify-between mb-12">
+    <svg class="scribble left-0 -bottom-4 w-[60vw] md:w-[40vw]" viewBox="0 0 400 30" aria-hidden="true"><path d="M5 20 C80 5 160 28 240 12 S360 8 395 18"/></svg>
+    <h2 class="font-anton uppercase text-[16vw] md:text-[10vw] leading-none" data-aos="fade-up">Lo que <span class="outline-text">hago</span></h2>
+    <span class="font-marker text-2xl hidden md:block rotate-6">(01—04)</span>
+  </div>
+  <div class="border-t border-paper/40">
+    <article class="row-hover group relative border-b border-paper/40 overflow-hidden py-8 md:py-10 service-row" data-aos="fade-up">
+      <div class="absolute inset-0 bg-paper -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
+      <div class="relative flex flex-col md:flex-row md:items-center justify-between gap-4 group-hover:text-ink transition-colors duration-300">
+        <span class="text-xs">01</span><h3 class="font-anton uppercase text-5xl md:text-8xl">Diseño visual</h3>
+        <p class="max-w-sm text-sm opacity-80">Sistemas visuales coherentes que posicionan marcas y pegan desde el primer vistazo.</p>
+      </div>
+    </article>
+    <article class="row-hover group relative border-b border-paper/40 overflow-hidden py-8 md:py-10 service-row" data-aos="fade-up">
+      <div class="absolute inset-0 bg-paper -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
+      <div class="relative flex flex-col md:flex-row md:items-center justify-between gap-4 group-hover:text-ink transition-colors duration-300">
+        <span class="text-xs">02</span><h3 class="font-anton uppercase text-5xl md:text-8xl">UX / UI</h3>
+        <p class="max-w-sm text-sm opacity-80">Flujos intuitivos, jerarquías claras y microinteracciones que convierten visitas en acciones.</p>
+      </div>
+    </article>
+    <article class="row-hover group relative border-b border-paper/40 overflow-hidden py-8 md:py-10 service-row" data-aos="fade-up">
+      <div class="absolute inset-0 bg-paper -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
+      <div class="relative flex flex-col md:flex-row md:items-center justify-between gap-4 group-hover:text-ink transition-colors duration-300">
+        <span class="text-xs">03</span><h3 class="font-anton uppercase text-5xl md:text-8xl">Front-End</h3>
+        <p class="max-w-sm text-sm opacity-80">HTML, CSS, JS y animación fluida. Código limpio, rápido y listo para escalar.</p>
+      </div>
+    </article>
+    <article class="row-hover group relative border-b border-paper/40 overflow-hidden py-8 md:py-10 service-row" data-aos="fade-up">
+      <div class="absolute inset-0 bg-paper -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
+      <div class="relative flex flex-col md:flex-row md:items-center justify-between gap-4 group-hover:text-ink transition-colors duration-300">
+        <span class="text-xs">04</span><h3 class="font-anton uppercase text-5xl md:text-8xl">Motion</h3>
+        <p class="max-w-sm text-sm opacity-80">Animación que le da vida a la interfaz y refuerza la identidad de marca.</p>
+      </div>
+    </article>
+  </div>
+</section>
+<section id="process" class="relative overflow-hidden bg-paper text-ink">
+  <div class="absolute top-24 left-6 md:left-20 z-[5] font-marker text-2xl -rotate-2">[ proceso ]</div>
+  <div id="processTrack" class="flex w-[400vw] h-screen">
+    <div class="proc-panel relative w-screen h-screen shrink-0 flex flex-col justify-center px-6 md:px-20">
+      <span class="proc-num font-anton absolute right-2 md:right-16 top-1/2 -translate-y-1/2 text-[58vw] md:text-[34vw] leading-none outline-ink select-none pointer-events-none">01</span>
+      <div class="relative z-[2] max-w-2xl">
+        <h3 class="proc-in font-anton uppercase text-[15vw] md:text-[9vw] leading-none">Thinking</h3>
+        <p class="proc-in font-marker text-xl md:text-3xl mt-4">Todo empieza entendiendo el problema antes de diseñar.</p>
+        <ul class="mt-8 space-y-2 text-sm md:text-base">
+          <li class="proc-in border-b border-ink/30 pb-2">→ Análisis del objetivo del proyecto</li>
+          <li class="proc-in border-b border-ink/30 pb-2">→ Identificación del usuario y contexto</li>
+          <li class="proc-in border-b border-ink/30 pb-2">→ Definición de necesidades reales</li>
+        </ul>
+      </div>
+    </div>
+    <div class="proc-panel relative w-screen h-screen shrink-0 flex flex-col justify-center px-6 md:px-20">
+      <span class="proc-num font-anton absolute right-2 md:right-16 top-1/2 -translate-y-1/2 text-[58vw] md:text-[34vw] leading-none outline-ink select-none pointer-events-none">02</span>
+      <div class="relative z-[2] max-w-2xl">
+        <h3 class="proc-in font-anton uppercase text-[15vw] md:text-[9vw] leading-none">UX</h3>
+        <p class="proc-in font-marker text-xl md:text-3xl mt-4">Estructuro la experiencia para que todo tenga sentido.</p>
+        <ul class="mt-8 space-y-2 text-sm md:text-base">
+          <li class="proc-in border-b border-ink/30 pb-2">→ Arquitectura de información</li>
+          <li class="proc-in border-b border-ink/30 pb-2">→ Flujos de navegación claros</li>
+          <li class="proc-in border-b border-ink/30 pb-2">→ Wireframes y decisiones funcionales</li>
+        </ul>
+      </div>
+    </div>
+    <div class="proc-panel relative w-screen h-screen shrink-0 flex flex-col justify-center px-6 md:px-20">
+      <span class="proc-num font-anton absolute right-2 md:right-16 top-1/2 -translate-y-1/2 text-[58vw] md:text-[34vw] leading-none outline-ink select-none pointer-events-none">03</span>
+      <div class="relative z-[2] max-w-2xl">
+        <h3 class="proc-in font-anton uppercase text-[15vw] md:text-[9vw] leading-none">UI</h3>
+        <p class="proc-in font-marker text-xl md:text-3xl mt-4">Transformo estructura en una experiencia visual atractiva.</p>
+        <ul class="mt-8 space-y-2 text-sm md:text-base">
+          <li class="proc-in border-b border-ink/30 pb-2">→ Diseño visual alineado a marca</li>
+          <li class="proc-in border-b border-ink/30 pb-2">→ Jerarquía y legibilidad</li>
+          <li class="proc-in border-b border-ink/30 pb-2">→ Microinteracciones y detalles</li>
+        </ul>
+      </div>
+    </div>
+    <div class="proc-panel relative w-screen h-screen shrink-0 flex flex-col justify-center px-6 md:px-20">
+      <span class="proc-num font-anton absolute right-2 md:right-16 top-1/2 -translate-y-1/2 text-[58vw] md:text-[34vw] leading-none outline-ink select-none pointer-events-none">04</span>
+      <div class="relative z-[2] max-w-2xl">
+        <h3 class="proc-in font-anton uppercase text-[15vw] md:text-[9vw] leading-none">Development</h3>
+        <p class="proc-in font-marker text-xl md:text-3xl mt-4">Convierto todo en una experiencia funcional y real.</p>
+        <ul class="mt-8 space-y-2 text-sm md:text-base">
+          <li class="proc-in border-b border-ink/30 pb-2">→ Desarrollo frontend optimizado</li>
+          <li class="proc-in border-b border-ink/30 pb-2">→ Animaciones y performance</li>
+          <li class="proc-in border-b border-ink/30 pb-2">→ Adaptabilidad a dispositivos</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="processBar" class="absolute bottom-0 left-0 h-2 w-full bg-ink origin-left" style="transform: scaleX(0)"></div>
+</section>
+<section id="projects" class="py-24 overflow-hidden">
+  <div class="px-5 md:px-10 flex items-end justify-between mb-12">
+    <h2 class="font-anton uppercase text-[16vw] md:text-[10vw] leading-none" data-aos="fade-up">Proyec<span class="outline-text">tos</span></h2>
+    <div class="flex gap-3">
+      <button class="prev mag border border-paper w-14 h-14 text-2xl hover:bg-paper hover:text-ink transition" aria-label="Anterior">←</button>
+      <button class="next mag border border-paper w-14 h-14 text-2xl hover:bg-paper hover:text-ink transition" aria-label="Siguiente">→</button>
+    </div>
+  </div>
+  <div class="swiper projSwiper !px-5 md:!px-10">
+    <div class="swiper-wrapper">
+      <a href="https://www.movil.gs/beneficiosparati/hazdeporte/mgs19034-muro" class="swiper-slide !w-[80vw] md:!w-[48vw] group">
+        <div class="overflow-hidden border border-paper/40 aspect-[16/10] bg-neutral-900"><img src="./assets/img/web.png" alt="Campaña Digital" class="w-full h-full object-cover"></div>
+        <div class="flex justify-between mt-4 items-baseline"><h3 class="font-anton uppercase text-3xl md:text-5xl">Web Experience</h3><span class="text-xs tracking-widest">01 / WEB</span></div>
+      </a>
+      <a href="https://www.behance.net/gallery/207608877/Video-introductorio-SUZUKI" class="swiper-slide !w-[80vw] md:!w-[48vw] group">
+        <div class="overflow-hidden border border-paper/40 aspect-[16/10] bg-neutral-900"><img src="./assets/img/motion.png" alt="Motion Graphics" class="w-full h-full object-cover"></div>
+        <div class="flex justify-between mt-4 items-baseline"><h3 class="font-anton uppercase text-3xl md:text-5xl">Motion Suzuki</h3><span class="text-xs tracking-widest">02 / MOTION</span></div>
+      </a>
+      <a href="https://www.movil.gs/innovacion-2026/" class="swiper-slide !w-[80vw] md:!w-[48vw] group">
+        <div class="overflow-hidden border border-paper/40 aspect-[16/10] bg-neutral-900"><img src="./assets/img/innova.png" alt="Innovación 2026" class="w-full h-full object-cover"></div>
+        <div class="flex justify-between mt-4 items-baseline"><h3 class="font-anton uppercase text-3xl md:text-5xl">Innovación 2026</h3><span class="text-xs tracking-widest">03 / LANDING</span></div>
+      </a>
+      <a href="https://www.behance.net/gallery/202789505/Dental-Family-SANJUAN" class="swiper-slide !w-[80vw] md:!w-[48vw] group">
+        <div class="overflow-hidden border border-paper/40 aspect-[16/10] bg-neutral-900"><img src="./assets/img/sanjuan.png" alt="Dental Family" class="w-full h-full object-cover"></div>
+        <div class="flex justify-between mt-4 items-baseline"><h3 class="font-anton uppercase text-3xl md:text-5xl">Dental Family</h3><span class="text-xs tracking-widest">04 / BRANDING</span></div>
+      </a>
+      <div class="swiper-slide !w-[80vw] md:!w-[48vw] group">
+        <div class="overflow-hidden border border-paper/40 aspect-[16/10] bg-neutral-900"><img src="./assets/img/3d.png" alt="3D" class="w-full h-full object-cover"></div>
+        <div class="flex justify-between mt-4 items-baseline"><h3 class="font-anton uppercase text-3xl md:text-5xl">3D Lab</h3><span class="text-xs tracking-widest">05 / 3D</span></div>
+      </div>
+    </div>
+    <div class="swiper-pagination !relative !mt-10 !text-left"></div>
+  </div>
+</section>
+
+<section id="experience" class="relative">
+  <div id="expStage" class="relative h-screen overflow-hidden bg-ink">
+    <div id="expTitle" class="absolute inset-0 flex flex-col items-center justify-center text-center px-5">
+      <p class="font-marker text-2xl md:text-4xl -rotate-3 mb-2">[ trayectoria ]</p>
+      <div role="heading" aria-level="2" class="font-anton uppercase leading-[.85] text-[24vw] md:text-[14vw]">
+        <span class="block overflow-hidden"><span class="exp-line block">Expe</span></span>
+        <span class="block overflow-hidden outline-text"><span class="exp-line block">riencia</span></span>
+      </div>
+      <p class="mt-8 text-xs uppercase tracking-[.3em] opacity-60">Scroll ↓ 5 capítulos</p>
+    </div>
+    <article class="exp-card absolute inset-x-3 md:inset-x-10 top-20 md:top-24 bottom-4 md:bottom-6 border-2 border-paper bg-paper text-ink overflow-hidden p-5 md:p-10 grid md:grid-cols-[1fr_1.6fr] gap-4 md:gap-10 content-start md:content-center">
+      <span class="absolute right-2 md:right-6 -bottom-4 md:-bottom-14 font-anton leading-none text-[38vw] md:text-[24vw] opacity-10 select-none pointer-events-none">01</span>
+      <div class="relative"><span class="text-xs uppercase tracking-widest">NOV 2024 — HOY</span><div class="font-marker text-xl md:text-3xl mt-2 -rotate-2">Grupo Salinas</div><h3 class="font-anton uppercase text-4xl md:text-7xl leading-[.95] mt-2">Diseñador Web</h3></div>
+      <div class="relative"><p class="text-sm md:text-lg">Páginas y piezas digitales para campañas comerciales con enfoque en marketing, jerarquía visual y usabilidad.</p><ul class="mt-4 space-y-2 text-xs md:text-base"><li class="border-b border-current/30 pb-2">→ Diseño y desarrollo web para campañas.</li><li class="border-b border-current/30 pb-2">→ Colaboración con equipo creativo y comunicación interna.</li><li class="border-b border-current/30 pb-2">→ Soluciones visuales alineadas a objetivos de marca.</li></ul><div class="mt-5 flex flex-wrap gap-2"><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Web</span><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Marketing</span><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">UX/UI</span></div></div>
+    </article>
+    <article class="exp-card absolute inset-x-3 md:inset-x-10 top-20 md:top-24 bottom-4 md:bottom-6 border-2 border-paper bg-[#0d0d0d] text-paper overflow-hidden p-5 md:p-10 grid md:grid-cols-[1fr_1.6fr] gap-4 md:gap-10 content-start md:content-center">
+      <span class="absolute right-2 md:right-6 -bottom-4 md:-bottom-14 font-anton leading-none text-[38vw] md:text-[24vw] opacity-10 select-none pointer-events-none">02</span>
+      <div class="relative"><span class="text-xs uppercase tracking-widest">ABR 2025</span><div class="font-marker text-xl md:text-3xl mt-2 -rotate-2">Dulce Díar</div><h3 class="font-anton uppercase text-4xl md:text-7xl leading-[.95] mt-2">Diseñador de Branding</h3></div>
+      <div class="relative"><p class="text-sm md:text-lg">Construcción de identidad visual desde concepto hasta aplicación para una marca gastronómica.</p><ul class="mt-4 space-y-2 text-xs md:text-base"><li class="border-b border-current/30 pb-2">→ Concepto de identidad visual.</li><li class="border-b border-current/30 pb-2">→ Paleta, estilo y lineamientos.</li><li class="border-b border-current/30 pb-2">→ Materiales alineados a la personalidad del negocio.</li></ul><div class="mt-5 flex flex-wrap gap-2"><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Branding</span><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Identidad</span><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Concepto</span></div></div>
+    </article>
+    <article class="exp-card absolute inset-x-3 md:inset-x-10 top-20 md:top-24 bottom-4 md:bottom-6 border-2 border-paper bg-paper text-ink overflow-hidden p-5 md:p-10 grid md:grid-cols-[1fr_1.6fr] gap-4 md:gap-10 content-start md:content-center">
+      <span class="absolute right-2 md:right-6 -bottom-4 md:-bottom-14 font-anton leading-none text-[38vw] md:text-[24vw] opacity-10 select-none pointer-events-none">03</span>
+      <div class="relative"><span class="text-xs uppercase tracking-widest">JUL — SEP 2024</span><div class="font-marker text-xl md:text-3xl mt-2 -rotate-2">Dental Family San Juan</div><h3 class="font-anton uppercase text-4xl md:text-7xl leading-[.95] mt-2">Diseñador de Branding</h3></div>
+      <div class="relative"><p class="text-sm md:text-lg">Identidad y sistema visual con enfoque comercial para mejorar la consistencia de marca.</p><ul class="mt-4 space-y-2 text-xs md:text-base"><li class="border-b border-current/30 pb-2">→ Creación de identidad de marca.</li><li class="border-b border-current/30 pb-2">→ Aplicación en distintos formatos.</li><li class="border-b border-current/30 pb-2">→ Adaptación visual a objetivos comerciales.</li></ul><div class="mt-5 flex flex-wrap gap-2"><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Branding</span><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Sistema Visual</span><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Comunicación</span></div></div>
+    </article>
+    <article class="exp-card absolute inset-x-3 md:inset-x-10 top-20 md:top-24 bottom-4 md:bottom-6 border-2 border-paper bg-[#0d0d0d] text-paper overflow-hidden p-5 md:p-10 grid md:grid-cols-[1fr_1.6fr] gap-4 md:gap-10 content-start md:content-center">
+      <span class="absolute right-2 md:right-6 -bottom-4 md:-bottom-14 font-anton leading-none text-[38vw] md:text-[24vw] opacity-10 select-none pointer-events-none">04</span>
+      <div class="relative"><span class="text-xs uppercase tracking-widest">ABR — AGO 2024</span><div class="font-marker text-xl md:text-3xl mt-2 -rotate-2">Suzuki</div><h3 class="font-anton uppercase text-4xl md:text-7xl leading-[.95] mt-2">Diseñador Gráfico y Web</h3></div>
+      <div class="relative"><p class="text-sm md:text-lg">Contenido gráfico, web y motion para campañas, comunicación comercial y presencia digital.</p><ul class="mt-4 space-y-2 text-xs md:text-base"><li class="border-b border-current/30 pb-2">→ Contenido para redes, flyers y piezas promocionales.</li><li class="border-b border-current/30 pb-2">→ Diseño y estructura web para iniciativas comerciales.</li><li class="border-b border-current/30 pb-2">→ Motion graphics y visuales por temporada.</li></ul><div class="mt-5 flex flex-wrap gap-2"><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Diseño Gráfico</span><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Web</span><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Motion</span></div></div>
+    </article>
+    <article class="exp-card absolute inset-x-3 md:inset-x-10 top-20 md:top-24 bottom-4 md:bottom-6 border-2 border-paper bg-paper text-ink overflow-hidden p-5 md:p-10 grid md:grid-cols-[1fr_1.6fr] gap-4 md:gap-10 content-start md:content-center">
+      <span class="absolute right-2 md:right-6 -bottom-4 md:-bottom-14 font-anton leading-none text-[38vw] md:text-[24vw] opacity-10 select-none pointer-events-none">05</span>
+      <div class="relative"><span class="text-xs uppercase tracking-widest">ABR 2022 — ABR 2024</span><div class="font-marker text-xl md:text-3xl mt-2 -rotate-2">UAEMéx</div><h3 class="font-anton uppercase text-4xl md:text-7xl leading-[.95] mt-2">Diseñador Gráfico y Técnico</h3></div>
+      <div class="relative"><p class="text-sm md:text-lg">Materiales institucionales, contenido editorial y apoyo visual para comunicación interna y estudiantil.</p><ul class="mt-4 space-y-2 text-xs md:text-base"><li class="border-b border-current/30 pb-2">→ Materiales institucionales y formatos oficiales.</li><li class="border-b border-current/30 pb-2">→ Contenido gráfico y campañas internas.</li><li class="border-b border-current/30 pb-2">→ Cobertura fotográfica y edición.</li></ul><div class="mt-5 flex flex-wrap gap-2"><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Editorial</span><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Fotografía</span><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Institucional</span></div></div>
+    </article>
+  </div>
+</section>
+
+<section id="skills" class="relative h-[100svh] overflow-hidden flex flex-col px-5 md:px-10 pt-24 pb-6">
+  <p class="font-marker text-xl md:text-3xl mb-2 -rotate-2">[ arsenal ]</p>
+  <h2 class="font-anton uppercase text-[14vw] md:text-[8vw] leading-none">Ha<span class="outline-text">bilidades</span></h2>
+
+  <div id="blobField" class="flex-1 min-h-0 mt-4 flex flex-wrap content-center justify-center items-center gap-1 md:gap-3">
+    <div class="blob w-[27vw] md:w-[13vw]"><div class="blob-in"><b>JavaScript</b><small>Interacción</small></div></div>
+    <div class="blob w-[23vw] md:w-[11vw]"><div class="blob-in"><b>HTML5</b><small>Semántico</small></div></div>
+    <div class="blob w-[23vw] md:w-[11vw]"><div class="blob-in"><b>CSS · Sass</b><small>Pixel perfect</small></div></div>
+    <div class="blob w-[27vw] md:w-[13vw]"><div class="blob-in"><b>GSAP</b><small>ScrollTrigger</small></div></div>
+    <div class="blob w-[27vw] md:w-[13vw]"><div class="blob-in"><b>Brightspot</b><small>CMS-ready</small></div></div>
+    <div class="blob w-[23vw] md:w-[11vw]"><div class="blob-in"><b>Landings</b><small>+50 proyectos</small></div></div>
+    <div class="blob w-[20vw] md:w-[9vw]"><div class="blob-in"><b>Responsive</b></div></div>
+    <div class="blob w-[27vw] md:w-[13vw]"><div class="blob-in"><b>Branding</b><small>5 marcas</small></div></div>
+    <div class="blob w-[23vw] md:w-[11vw]"><div class="blob-in"><b>Identidad</b><small>Lineamientos</small></div></div>
+    <div class="blob w-[27vw] md:w-[13vw]"><div class="blob-in"><b>Motion</b><small>Graphics</small></div></div>
+    <div class="blob w-[23vw] md:w-[11vw]"><div class="blob-in"><b>UX / UI</b></div></div>
+    <div class="blob w-[23vw] md:w-[11vw]"><div class="blob-in"><b>Componentes</b><small>Homologa</small></div></div>
+    <div class="blob w-[20vw] md:w-[9vw]"><div class="blob-in"><b>Editorial</b></div></div>
+    <div class="blob w-[20vw] md:w-[9vw]"><div class="blob-in"><b>Foto</b></div></div>
+  </div>
+</section>
+
+<section id="contact" class="relative px-5 md:px-10 py-32 text-center overflow-hidden scan">
+  <p class="font-marker text-2xl md:text-4xl -rotate-3 mb-4" data-aos="fade-up">¿listo para dejar tu marca?</p>
+  <h2 class="font-anton uppercase leading-[.85] text-[20vw] md:text-[15vw]" id="cta"><span class="glitch" data-text="HABLEMOS">HABLEMOS</span></h2>
+  <div class="drips flex justify-center gap-[5vw] h-24 md:h-40 -mt-2" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <svg class="scribble left-[6%] top-24 w-16 md:w-28" viewBox="0 0 60 60" aria-hidden="true"><path d="M6 6 L54 54 M54 8 L8 52"/></svg>
+  <svg class="scribble right-[8%] bottom-24 w-20 md:w-32" viewBox="0 0 100 60" aria-hidden="true"><path d="M5 30 C20 5 70 2 92 28 C80 55 30 58 8 36"/></svg>
+  <div class="mt-12 flex flex-col md:flex-row gap-4 justify-center">
+    <a href="mailto:artduzt@gmail.com" class="mag bg-paper text-ink font-anton uppercase tracking-wider px-10 py-5 text-xl hover:bg-transparent hover:text-paper border border-paper transition">Correo</a>
+    <a href="https://wa.me/+527228897198" target="_blank" rel="noopener noreferrer" class="mag border border-paper font-anton uppercase tracking-wider px-10 py-5 text-xl hover:bg-paper hover:text-ink transition">WhatsApp</a>
+    <a href="https://www.behance.net/arturodaz12" target="_blank" rel="noopener noreferrer" class="mag border border-paper font-anton uppercase tracking-wider px-10 py-5 text-xl hover:bg-paper hover:text-ink transition">Behance</a>
+  </div>
+</section>
+</main>
+<footer class="border-t border-paper/30 px-5 md:px-10 py-6 flex flex-col md:flex-row justify-between text-xs uppercase tracking-widest opacity-70 gap-2">
+  <span>© 2026 Arturo Díaz — Creative Developer</span><span>Hecho en Edomex · Sin filtros</span>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* helper: enciende/apaga cosas según si su elemento está en pantalla */
+function whenVisible(el, onIn, onOut, threshold = 0.1) {
+  new IntersectionObserver(es => {
+    const e = es[es.length - 1];
+    e.isIntersecting ? onIn(e) : onOut && onOut(e);
+  }, { threshold }).observe(el);
+}
+
+document.body.style.overflow = 'hidden';
+AOS.init({ duration: 900, once: true, easing: 'ease-out-cubic', offset: 60 });
+
+const cur = document.getElementById('cursor');
+const cx = gsap.quickTo(cur, 'x', { duration: .25, ease: 'power3' });
+const cy = gsap.quickTo(cur, 'y', { duration: .25, ease: 'power3' });
+
+window.addEventListener('mousemove', e => {
+  cx(e.clientX);
+  cy(e.clientY);
+});
+
+document.querySelectorAll('a, button, .service-row').forEach(el => {
+  el.addEventListener('mouseenter', () => cur.classList.add('big'));
+  el.addEventListener('mouseleave', () => cur.classList.remove('big'));
+});
+
+document.querySelectorAll('.mag').forEach(el => {
+  el.addEventListener('mousemove', e => {
+    const r = el.getBoundingClientRect();
+    gsap.to(el, {
+      x: (e.clientX - r.left - r.width / 2) * .3,
+      y: (e.clientY - r.top - r.height / 2) * .3,
+      duration: .3
+    });
+  });
+
+  el.addEventListener('mouseleave', () => {
+    gsap.to(el, {
+      x: 0,
+      y: 0,
+      duration: .6,
+      ease: 'elastic.out(1,.4)'
+    });
+  });
+});
+
+function splitWords(el) {
+  el.innerHTML = el.textContent.trim().split(/\s+/).map(w => `<span class="char" style="opacity: .12">${w}</span>`).join(' ');
+  return el.querySelectorAll('.char');
+}
+
+const counter = { v: 0 };
+const intro = gsap.timeline({ paused: true });
+
+intro
+  .from('#heroTitle .glitch, #heroTitle > span:nth-child(2) > span', {
+    yPercent: 120,
+    rotate: 4,
+    duration: 1.1,
+    ease: 'power4.out',
+    stagger: .15
+  })
+  .from('#faceWrap', {
+    yPercent: 25,
+    opacity: 0,
+    scale: 1.1,
+    duration: 1.4,
+    ease: 'power3.out'
+  }, '-=.9')
+  .from('.hero-fade', {
+    y: 30,
+    opacity: 0,
+    stagger: .12,
+    duration: .8,
+    ease: 'power2.out'
+  }, '-=.8');
+
+gsap.timeline()
+  .to(counter, {
+    v: 100,
+    duration: 2.2,
+    ease: 'power2.inOut',
+    onUpdate: () => {
+      document.getElementById('count').textContent = Math.round(counter.v);
+      document.getElementById('bar').style.width = counter.v + '%';
+    }
+  })
+  .to('#preloader', {
+    yPercent: -100,
+    duration: .9,
+    ease: 'power4.inOut'
+  })
+  .add(() => {
+    intro.play();
+    document.body.style.overflow = '';
+    ScrollTrigger.refresh();
+  }, '-=.3');
+
+gsap.to('#progress', {
+  scaleX: 1,
+  ease: 'none',
+  scrollTrigger: {
+    scrub: .3,
+    start: 0,
+    end: 'max'
+  }
+});
+
+window.addEventListener('mousemove', e => {
+  const x = (e.clientX / innerWidth - .5);
+  const y = (e.clientY / innerHeight - .5);
+
+  gsap.to('#face', {
+    x: x * 30,
+    y: y * 20,
+    duration: 1,
+    ease: 'power2.out'
+  });
+
+  gsap.to('#faceGhost', {
+    x: 10 + x * 70,
+    y: y * 40,
+    duration: 1.2,
+    ease: 'power2.out'
+  });
+});
+
+const heroK = innerWidth > 767 ? 1.08 : 1.02;
+
+gsap.timeline({
+  scrollTrigger: {
+    trigger: '#home',
+    start: 'top top',
+    end: '+=90%',
+    pin: true,
+    scrub: 1,
+    anticipatePin: 1
+  }
+})
+  .to('#face', {
+    scale: heroK,
+    transformOrigin: '50% 100%'
+  }, 0)
+  .to('#faceGhost', {
+    scale: heroK,
+    transformOrigin: '50% 100%',
+    xPercent: 6
+  }, 0)
+  .to('#heroGrid', { yPercent: 18 }, 0)
+  .to('#heroTitle', {
+    xPercent: innerWidth > 767 ? -12 : -2
+  }, 0)
+  .to('#heroContent', {
+    yPercent: innerWidth > 767 ? -12 : -3
+  }, 0);
+
+/* ===== Marquee: solo corre con la franja en pantalla ===== */
+const mq = gsap.to('#marquee > div', {
+  xPercent: -100,
+  repeat: -1,
+  duration: 14,
+  ease: 'none',
+  paused: true
+});
+let mqOn = false;
+
+whenVisible(document.getElementById('marquee').parentElement,
+  () => { mqOn = true;  mq.paused(false); },
+  () => { mqOn = false; mq.paused(true); });
+
+ScrollTrigger.create({
+  onUpdate: s => {
+    if (!mqOn) return;
+
+    gsap.to(mq, {
+      timeScale: 1 + Math.abs(s.getVelocity()) / 250 * (s.direction),
+      duration: .2,
+      overwrite: true
+    });
+
+    gsap.to(mq, {
+      timeScale: s.direction,
+      duration: 1,
+      delay: .2
+    });
+
+    gsap.to('#marquee', {
+      skewX: gsap.utils.clamp(-12, 12, s.getVelocity() / -200),
+      duration: .2,
+      overwrite: true
+    });
+
+    gsap.to('#marquee', {
+      skewX: 0,
+      duration: .8,
+      delay: .2
+    });
+  }
+});
+
+gsap.to(splitWords(document.getElementById('manifesto')), {
+  opacity: 1,
+  stagger: .1,
+  ease: 'none',
+  scrollTrigger: {
+    trigger: '#manifesto',
+    start: 'top 80%',
+    end: 'bottom 50%',
+    scrub: true
+  }
+});
+
+document.querySelectorAll('.count').forEach(el => {
+  const o = { v: 0 };
+
+  gsap.to(o, {
+    v: +el.dataset.to,
+    duration: 2,
+    ease: 'power2.out',
+    snap: { v: 1 },
+    scrollTrigger: {
+      trigger: el,
+      start: 'top 90%',
+      once: true
+    },
+    onUpdate: () => el.textContent = o.v
+  });
+});
+
+gsap.utils.toArray('[data-speed]').forEach(el => {
+  const s = parseFloat(el.dataset.speed);
+
+  gsap.fromTo(el,
+    { y: () => -s * 80 },
+    {
+      y: () => s * 80,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: el.closest('section'),
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true,
+        invalidateOnRefresh: true
+      }
+    }
+  );
+});
+
+// título de Servicios (está arriba de los pins, aquí va bien)
+gsap.utils.toArray('#services h2').forEach(h => {
+  gsap.from(h, {
+    xPercent: -8,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: h,
+      start: 'top bottom',
+      end: 'top 30%',
+      scrub: true
+    }
+  });
+});
+
+/* F) Garabato de Servicios (el de Contacto está al final) */
+document.querySelectorAll('#services .scribble path').forEach(p => {
+  const L = p.getTotalLength();
+
+  gsap.set(p, { strokeDasharray: L, strokeDashoffset: L });
+  gsap.to(p, {
+    strokeDashoffset: 0,
+    duration: 1.2,
+    ease: 'power2.inOut',
+    scrollTrigger: {
+      trigger: p.closest('svg'),
+      start: 'top 88%',
+      toggleActions: 'play none none reverse'
+    }
+  });
+});
+
+/* ===== Proceso (scroll horizontal) ===== */
+const track = document.getElementById('processTrack');
+const dist = () => track.scrollWidth - innerWidth;
+
+const hs = gsap.to(track, {
+  x: () => -dist(),
+  ease: 'none',
+  scrollTrigger: {
+    trigger: '#process',
+    start: 'top top',
+    end: () => '+=' + dist(),
+    pin: true,
+    scrub: 1,
+    invalidateOnRefresh: true,
+    anticipatePin: 1
+  }
+});
+
+gsap.to('#processBar', {
+  scaleX: 1,
+  ease: 'none',
+  scrollTrigger: {
+    trigger: '#process',
+    start: 'top top',
+    end: () => '+=' + dist(),
+    scrub: true,
+    invalidateOnRefresh: true
+  }
+});
+
+gsap.utils.toArray('.proc-panel').forEach((p, i) => {
+  gsap.from(p.querySelector('.proc-num'), {
+    xPercent: 50,
+    rotate: 10,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: p,
+      containerAnimation: hs,
+      start: 'left 100%',
+      end: 'left 20%',
+      scrub: true
+    }
+  });
+
+  if (i > 0) {
+    gsap.from(p.querySelectorAll('.proc-in'), {
+      y: 60,
+      opacity: 0,
+      stagger: .1,
+      duration: .8,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: p,
+        containerAnimation: hs,
+        start: 'left 75%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+  }
+});
+
+// entrada del panel 01 y del marcador, cuando la sección asoma
+gsap.from(
+  [
+    document.querySelector('#process > div.font-marker'),
+    ...gsap.utils.toArray('.proc-panel')[0].querySelectorAll('.proc-in')
+  ],
+  {
+    y: 60,
+    opacity: 0,
+    stagger: .1,
+    duration: .8,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: '#process',
+      start: 'top 70%',
+      toggleActions: 'play none none reverse'
+    }
+  }
+);
+
+/* ===== Experiencia ===== */
+const expCards = gsap.utils.toArray('.exp-card');
+
+gsap.set(expCards, {
+  yPercent: 110,
+  transformOrigin: '50% 0%'
+});
+
+gsap.from('#expTitle .exp-line', {
+  yPercent: 110,
+  stagger: .12,
+  duration: 1,
+  ease: 'power4.out',
+  scrollTrigger: {
+    trigger: '#experience',
+    start: 'top 70%',
+    toggleActions: 'play none none reverse'
+  }
+});
+
+gsap.from('#expTitle > p', {
+  y: 30,
+  opacity: 0,
+  stagger: .15,
+  duration: .8,
+  ease: 'power3.out',
+  scrollTrigger: {
+    trigger: '#experience',
+    start: 'top 70%',
+    toggleActions: 'play none none reverse'
+  }
+});
+
+const STEP = 2;
+
+const expTl = gsap.timeline({
+  defaults: { ease: 'none' },
+  scrollTrigger: {
+    trigger: '#expStage',
+    start: 'top top',
+    end: () => '+=' + innerHeight * expCards.length * STEP * .8,
+    pin: true,
+    scrub: 1,
+    anticipatePin: 1,
+    invalidateOnRefresh: true,
+    snap: {
+      snapTo: 'labels',
+      duration: { min: .2, max: .6 },
+      delay: .1,
+      ease: 'power1.inOut'
+    }
+  }
+});
+
+expTl.addLabel('titulo', 0);
+
+expCards.forEach((c, i) => {
+  const at = .6 + i * STEP;
+
+  expTl.to(c, {
+    yPercent: 0,
+    y: i * 16,
+    duration: 1
+  }, at);
+
+  if (i === 0) {
+    expTl.to('#expTitle', {
+      scale: .85,
+      opacity: .2,
+      duration: 1
+    }, at);
+  } else {
+    expTl.to(expCards[i - 1], {
+      scale: .95,
+      filter: 'brightness(.5)',
+      duration: 1
+    }, at);
+  }
+
+  // scramble de la fecha cuando la tarjeta entra
+  expTl.add(() => {
+    const s = c.querySelector('span.text-xs');
+    s && s.firstChild && scramble(s.firstChild, .8);
+  }, at + .4);
+
+  expTl.addLabel('card' + i, at + 1);
+});
+
+expTl.to({}, { duration: 1 });
+
+/* ===== Menú ===== */
+const menu = document.getElementById('menu');
+const burger = document.getElementById('burger');
+const bl = burger.querySelectorAll('.burger-line');
+
+gsap.set(menu, {
+  clipPath: 'inset(0 0 100% 0)',
+  visibility: 'hidden'
+});
+
+const menuTl = gsap.timeline({ paused: true })
+  .set(menu, { visibility: 'visible' })
+  .to(menu, {
+    clipPath: 'inset(0 0 0% 0)',
+    duration: .9,
+    ease: 'power4.inOut'
+  })
+  .to(bl[0], { y: 4, rotate: 45, duration: .4 }, 0)
+  .to(bl[1], { y: -4, rotate: -45, duration: .4 }, 0)
+  .from('.menu-link .label', {
+    yPercent: 110,
+    stagger: .07,
+    duration: .8,
+    ease: 'power4.out'
+  }, '-=.4')
+  .from('.menu-extra', {
+    opacity: 0,
+    y: 24,
+    stagger: .1,
+    duration: .6
+  }, '-=.6')
+  .from('#menuFace', {
+    scale: 1.25,
+    duration: 1.1,
+    ease: 'power3.out'
+  }, '-=1.1');
+
+let menuOpen = false;
+
+function toggleMenu(open) {
+  menuOpen = open;
+  burger.setAttribute('aria-expanded', open);
+  menu.setAttribute('aria-hidden', !open);
+  document.body.style.overflow = open ? 'hidden' : '';
+  open ? menuTl.timeScale(1).play() : menuTl.timeScale(1.6).reverse();
+}
+
+burger.addEventListener('click', () => toggleMenu(!menuOpen));
+
+window.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && menuOpen) toggleMenu(false);
+});
+
+document.querySelectorAll('.menu-link').forEach(l => {
+  const target = document.querySelector(l.getAttribute('href'));
+
+  l.addEventListener('click', e => {
+    e.preventDefault();
+    toggleMenu(false);
+    setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 550);
+  });
+});
+
+/* ===== STREET / GRAFFITI / CYBERPUNK FX (B&W) ===== */
+
+/* A) Scramble cyberpunk */
+const GLYPHS = '█▓▒░<>/\\|[]{}#$%&*+=?01';
+
+function scramble(node, dur = .8) {
+  const o = node._o || (node._o = node.textContent);
+  const st = { p: 0 };
+
+  node._t && node._t.kill();
+  node._t = gsap.to(st, {
+    p: 1,
+    duration: dur,
+    ease: 'none',
+    onUpdate: () => {
+      const k = Math.floor(st.p * o.length);
+      node.textContent = o.slice(0, k) + o.slice(k).replace(/\S/g, () => GLYPHS[Math.random() * GLYPHS.length | 0]);
+    },
+    onComplete: () => node.textContent = o
+  });
+}
+
+// los triggers de scramble se crean al final del script (después de los pins)
+const scrambleQueue = [];
+
+document.querySelectorAll('.tape, .mag, .exp-card span.text-xs, header a.font-anton').forEach(el => {
+  if (el.children.length) return;
+  const node = el.firstChild;
+
+  el.addEventListener('mouseenter', () => scramble(node, .6));
+
+  // hero, header y tarjetas tienen su entrada en otro lado
+  if (el.closest('#home, header, .exp-card')) return;
+
+  scrambleQueue.push({ el, node });
+});
+
+document.querySelectorAll('.menu-link').forEach(l => {
+  const node = [...l.querySelector('.label').childNodes].find(n => n.nodeType === 3);
+  node && l.addEventListener('mouseenter', () => scramble(node, .5));
+});
+
+/* B) Spray splat */
+function splat(x, y, n = 14) {
+  for (let i = 0; i < n; i++) {
+    const d = document.createElement('i');
+    const s = gsap.utils.random(4, 14);
+    const a = Math.random() * Math.PI * 2;
+    const r = gsap.utils.random(30, 140);
+
+    d.className = 'splat';
+    document.body.appendChild(d);
+    gsap.set(d, { left: x, top: y, width: s, height: s });
+    gsap.to(d, {
+      x: Math.cos(a) * r,
+      y: Math.sin(a) * r + 20,
+      scale: 0,
+      duration: gsap.utils.random(.5, 1),
+      ease: 'power3.out',
+      onComplete: () => d.remove()
+    });
+  }
+}
+
+window.addEventListener('pointerdown', e => splat(e.clientX, e.clientY));
+
+/* C + D) Neón y glitch de cara: solo con el hero en pantalla */
+const neon = gsap.timeline({ repeat: -1, repeatDelay: 3, delay: 2, paused: true })
+  .to('p.font-marker.hero-fade', { opacity: .25, duration: .05 })
+  .to('p.font-marker.hero-fade', { opacity: 1, duration: .05 })
+  .to('p.font-marker.hero-fade', { opacity: .5, duration: .04 })
+  .to('p.font-marker.hero-fade', { opacity: 1, duration: .08 });
+
+gsap.set('#face', { clipPath: 'inset(0% 0% 0% 0%)' });
+
+let faceCall, faceTl;
+
+function faceBurst() {
+  faceCall = gsap.delayedCall(gsap.utils.random(3, 6), () => {
+    faceTl = gsap.timeline({ onComplete: faceBurst })
+      .to('#faceGhost', { skewX: 25, opacity: .9, duration: .06 }, 0)
+      .to('#face', { clipPath: 'inset(20% 0% 55% 0%)', duration: .04 }, 0)
+      .to('#face', { clipPath: 'inset(60% 0% 10% 0%)', duration: .04 })
+      .to('#face', { clipPath: 'inset(0% 0% 0% 0%)', duration: .04 })
+      .to('#faceGhost', { skewX: 0, opacity: .3, duration: .12 });
+  });
+}
+
+function stopFace() {
+  if (!faceCall) return;
+  faceCall.kill();
+  faceTl && faceTl.kill();
+  faceCall = faceTl = null;
+  gsap.set('#face', { clipPath: 'inset(0% 0% 0% 0%)' });
+  gsap.set('#faceGhost', { skewX: 0, opacity: .3 });
+}
+
+let introDone = false, heroSeen = false;
+
+function syncHero() {
+  const on = introDone && heroSeen;
+  document.querySelectorAll('#home .glitch').forEach(g => g.classList.toggle('live', on));
+  if (on) { neon.paused(false); if (!faceCall) faceBurst(); }
+  else    { neon.paused(true);  stopFace(); }
+}
+
+intro.eventCallback('onComplete', () => { introDone = true; syncHero(); });
+
+whenVisible(document.getElementById('home'),
+  () => { heroSeen = true;  syncHero(); },
+  () => { heroSeen = false; syncHero(); }, .05);
+
+// scramble de botones, tapes y logo: al terminar la intro, no debajo del preloader
+intro.add(() => {
+  document.querySelectorAll('#home .tape, #home .mag, header a.font-anton').forEach(el => {
+    if (!el.children.length && el.firstChild) scramble(el.firstChild, 1);
+  });
+}, '-=.4');
+
+/* E) RGB split por velocidad de scroll */
+const rgbTargets = gsap.utils.toArray('h1, section h2');
+const rgb = { v: 0, t: 0, last: '' };
+
+ScrollTrigger.create({
+  onUpdate: s => rgb.t = gsap.utils.clamp(-24, 24, s.getVelocity() / 80)
+});
+
+gsap.ticker.add(() => {
+  rgb.t *= .9;
+  rgb.v += (rgb.t - rgb.v) * .2;
+
+  const str = Math.abs(rgb.v) < .3 ? '' : `${rgb.v}px 0 rgba(255,255,255,.55), ${-rgb.v}px 0 rgba(130,130,130,.55)`;
+
+  if (str !== rgb.last) {
+    rgb.last = str;
+    rgbTargets.forEach(el => el.style.textShadow = str);
+  }
+});
+
+/* H) Sello slam */
+gsap.from('#stamp', {
+  scale: 3,
+  opacity: 0,
+  rotation: -25,
+  duration: .35,
+  ease: 'power4.in',
+  scrollTrigger: {
+    trigger: '#stamp',
+    start: 'top 85%',
+    once: true
+  },
+  onComplete: () => {
+    const r = document.getElementById('stamp').getBoundingClientRect();
+
+    splat(r.left + r.width / 2, r.top + r.height / 2, 22);
+    gsap.fromTo('#about', { x: -8 }, { x: 0, duration: .5, ease: 'elastic.out(1,.2)' });
+  }
+});
+
+/* I) Tilt 3D en proyectos */
+if (matchMedia('(pointer: fine)').matches) {
+  const ps = document.querySelector('.projSwiper');
+
+  ps.addEventListener('mousemove', e => {
+    const s = e.target.closest('.swiper-slide');
+    if (!s) return;
+    const r = s.getBoundingClientRect();
+
+    gsap.to(s, {
+      rotationY: ((e.clientX - r.left) / r.width - .5) * 14,
+      rotationX: -((e.clientY - r.top) / r.height - .5) * 14,
+      transformPerspective: 900,
+      duration: .4
+    });
+  });
+
+  ps.addEventListener('mouseout', e => {
+    const s = e.target.closest('.swiper-slide');
+    if (s && !s.contains(e.relatedTarget)) gsap.to(s, { rotationX: 0, rotationY: 0, duration: .6 });
+  });
+}
+
+/* ===== J) SKILLS: blobs que suben con el scroll (pin) ===== */
+const blobs = gsap.utils.toArray('#blobField .blob');
+const MORPH = '58% 42% 55% 45% / 48% 56% 44% 52%';
+const DROP  = '50% 50% 50% 50% / 72% 72% 28% 28%';
+
+const skillsEl = document.getElementById('skills');
+const skillHead = '#skills > p, #skills > h2';
+
+// título escondido hasta que la sección asome
+gsap.set(skillHead, { opacity: 0, y: 40 });
+
+const floats = [];
+
+blobs.forEach(b => {
+  b._in  = b.querySelector('.blob-in');
+  b._txt = b._in.querySelector('b');
+  b._sub = b._in.querySelector('small');
+  b._trail = document.createElement('i');
+  b._trail.className = 'trail';
+  b.appendChild(b._trail);
+
+  floats.push(gsap.to(b._in, {
+    y: gsap.utils.random(-14, 14),
+    x: gsap.utils.random(-10, 10),
+    rotation: gsap.utils.random(-6, 6),
+    duration: gsap.utils.random(2.5, 4.5),
+    ease: 'sine.inOut', yoyo: true, repeat: -1, paused: true
+  }));
+});
+
+// entrada del título al ver el 15% de la sección; se reinicia si sales hacia arriba
+whenVisible(skillsEl,
+  () => gsap.to(skillHead, { opacity: 1, y: 0, stagger: .15, duration: .8, ease: 'power3.out', overwrite: 'auto' }),
+  e => { if (e.boundingClientRect.top > 0) gsap.set(skillHead, { opacity: 0, y: 40 }); },
+  .15);
+
+// flotación: solo mientras la sección esté en pantalla (incluye todo el pin)
+whenVisible(skillsEl,
+  () => floats.forEach(f => f.paused(false)),
+  () => floats.forEach(f => f.paused(true)),
+  0);
+
+// los blobs suben con el scroll, ya con la sección pegada
+const skillsTl = gsap.timeline({
+  defaults: { ease: 'none' },
+  scrollTrigger: {
+    trigger: '#skills',
+    start: 'top top',
+    end: () => '+=' + innerHeight * 2.5,
+    pin: true,
+    scrub: 1,
+    anticipatePin: 1,
+    invalidateOnRefresh: true
+  }
+});
+
+gsap.utils.shuffle(blobs.slice()).forEach((b, i) => {
+  const at = i * 0.3;
+
+  skillsTl
+    .fromTo(b, { y: () => innerHeight }, {
+      y: 0, duration: 1.4, ease: 'power3.out',
+      onUpdate: () => {
+        b._trail.style.height = Math.max(0, innerHeight - gsap.getProperty(b, 'y')) + 'px';
+      }
+    }, at)
+    .fromTo(b._in,
+      { scaleX: .45, scaleY: .45, borderRadius: DROP },
+      { scaleX: .8, scaleY: 1.3, duration: 1.2, ease: 'power2.out' }, at)
+    .to(b._trail, { scaleY: 0, duration: .5, ease: 'power3.in' }, at + 1.1)
+    .to(b._in, { scaleX: 1.3, scaleY: .7, duration: .15, ease: 'power2.out' }, at + 1.4)
+    .to(b._in, { scaleX: 1, scaleY: 1, borderRadius: MORPH, duration: .5, ease: 'back.out(2)' }, at + 1.55)
+    .to(b._txt, { opacity: 1, duration: .3 }, at + 1.8)
+    .to(b._sub, { opacity: .7, duration: .3 }, at + 1.8);
+});
+
+skillsTl.to({}, { duration: 1 });
+
+/* =====================================================================
+   TODO LO DE ABAJO SE CREA DESPUÉS DE LOS 4 PINS (hero, proceso,
+   experiencia, habilidades). Así sus posiciones salen bien calculadas
+   y las animaciones arrancan cuando de verdad aparecen en pantalla.
+   ===================================================================== */
+
+// título de Proyectos
+gsap.utils.toArray('#projects h2').forEach(h => {
+  gsap.from(h, {
+    xPercent: -8,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: h,
+      start: 'top bottom',
+      end: 'top 30%',
+      scrub: true
+    }
+  });
+});
+
+// scramble de botones y etiquetas que están debajo de los pins
+scrambleQueue.forEach(({ el, node }) => {
+  ScrollTrigger.create({
+    trigger: el,
+    start: 'top 92%',
+    once: true,
+    onEnter: () => scramble(node, 1)
+  });
+});
+
+// resaltado del menú según la sección visible
+document.querySelectorAll('.menu-link').forEach(l => {
+  const target = document.querySelector(l.getAttribute('href'));
+
+  ScrollTrigger.create({
+    trigger: target,
+    start: 'top 50%',
+    end: 'bottom 50%',
+    onToggle: st => l.classList.toggle('is-active', st.isActive)
+  });
+});
+
+/* ===== CONTACTO ===== */
+
+// HABLEMOS crece y aparece con el scroll
+gsap.from('#cta', {
+  scale: .6,
+  opacity: 0,
+  ease: 'power3.out',
+  scrollTrigger: {
+    trigger: '#cta',
+    start: 'top 90%',
+    end: 'top 40%',
+    scrub: true
+  }
+});
+
+// garabatos de contacto (se dibujan con un pequeño delay)
+document.querySelectorAll('#contact .scribble path').forEach(p => {
+  const L = p.getTotalLength();
+
+  gsap.set(p, { strokeDasharray: L, strokeDashoffset: L });
+  gsap.to(p, {
+    strokeDashoffset: 0,
+    duration: 1.2,
+    delay: .6,
+    ease: 'power2.inOut',
+    scrollTrigger: {
+      trigger: p.closest('svg'),
+      start: 'top 88%',
+      toggleActions: 'play none none reverse'
+    }
+  });
+});
+
+// goteos de pintura
+gsap.fromTo('.drips i',
+  { scaleY: 0 },
+  {
+    scaleY: () => gsap.utils.random(.25, 1),
+    duration: () => gsap.utils.random(1.5, 3),
+    delay: .1,
+    ease: 'power1.in',
+    stagger: .15,
+    scrollTrigger: {
+      trigger: '#cta',
+      start: 'top 60%',
+      toggleActions: 'play none none reverse'
+    }
+  }
+);
+
+// glitch de HABLEMOS: se enciende un momento después de aparecer
+ScrollTrigger.create({
+  trigger: '#cta',
+  start: 'top 60%',
+  onEnter: () => gsap.delayedCall(.8, () => document.querySelector('#contact .glitch').classList.add('live')),
+  onLeaveBack: () => document.querySelector('#contact .glitch').classList.remove('live')
+});
+
+/* ===== Recalcular posiciones al cargar (GSAP y AOS) ===== */
+window.addEventListener('load', () => {
+  ScrollTrigger.refresh();
+  AOS.refreshHard();
+});
+ScrollTrigger.addEventListener('refresh', () => AOS.refreshHard());
+
+/* ===== Swiper: autoplay solo con la sección en pantalla ===== */
+const projSwiper = new Swiper('.projSwiper', {
+  slidesPerView: 'auto',
+  spaceBetween: 24,
+  grabCursor: true,
+  loop: true,
+  speed: 800,
+  autoplay: {
+    delay: 3500,
+    disableOnInteraction: false,
+    pauseOnMouseEnter: true
+  },
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true
+  },
+  navigation: {
+    nextEl: '.next',
+    prevEl: '.prev'
+  },
+  mousewheel: {
+    forceToAxis: true
+  }
+});
+
+projSwiper.autoplay.stop();
+whenVisible(document.getElementById('projects'),
+  () => projSwiper.autoplay.start(),
+  () => projSwiper.autoplay.stop(), .2);
+</script>
+</body>
+</html>
