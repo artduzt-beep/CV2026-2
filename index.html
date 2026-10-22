@@ -596,7 +596,6 @@ p.font-marker.hero-fade {
 <script>
 gsap.registerPlugin(ScrollTrigger);
 
-/* helper: enciende/apaga cosas según si su elemento está en pantalla */
 function whenVisible(el, onIn, onOut, threshold = 0.1) {
   new IntersectionObserver(es => {
     const e = es[es.length - 1];
@@ -751,7 +750,6 @@ gsap.timeline({
     yPercent: innerWidth > 767 ? -12 : -3
   }, 0);
 
-/* ===== Marquee: solo corre con la franja en pantalla ===== */
 const mq = gsap.to('#marquee > div', {
   xPercent: -100,
   repeat: -1,
@@ -843,7 +841,6 @@ gsap.utils.toArray('[data-speed]').forEach(el => {
   );
 });
 
-// título de Servicios (está arriba de los pins, aquí va bien)
 gsap.utils.toArray('#services h2').forEach(h => {
   gsap.from(h, {
     xPercent: -8,
@@ -857,7 +854,6 @@ gsap.utils.toArray('#services h2').forEach(h => {
   });
 });
 
-/* F) Garabato de Servicios (el de Contacto está al final) */
 document.querySelectorAll('#services .scribble path').forEach(p => {
   const L = p.getTotalLength();
 
@@ -874,7 +870,6 @@ document.querySelectorAll('#services .scribble path').forEach(p => {
   });
 });
 
-/* ===== Proceso (scroll horizontal) ===== */
 const track = document.getElementById('processTrack');
 const dist = () => track.scrollWidth - innerWidth;
 
@@ -935,7 +930,6 @@ gsap.utils.toArray('.proc-panel').forEach((p, i) => {
   }
 });
 
-// entrada del panel 01 y del marcador, cuando la sección asoma
 gsap.from(
   [
     document.querySelector('#process > div.font-marker'),
@@ -955,7 +949,6 @@ gsap.from(
   }
 );
 
-/* ===== Experiencia ===== */
 const expCards = gsap.utils.toArray('.exp-card');
 
 gsap.set(expCards, {
@@ -1034,7 +1027,6 @@ expCards.forEach((c, i) => {
     }, at);
   }
 
-  // scramble de la fecha cuando la tarjeta entra
   expTl.add(() => {
     const s = c.querySelector('span.text-xs');
     s && s.firstChild && scramble(s.firstChild, .8);
@@ -1045,7 +1037,6 @@ expCards.forEach((c, i) => {
 
 expTl.to({}, { duration: 1 });
 
-/* ===== Menú ===== */
 const menu = document.getElementById('menu');
 const burger = document.getElementById('burger');
 const bl = burger.querySelectorAll('.burger-line');
@@ -1108,9 +1099,7 @@ document.querySelectorAll('.menu-link').forEach(l => {
   });
 });
 
-/* ===== STREET / GRAFFITI / CYBERPUNK FX (B&W) ===== */
 
-/* A) Scramble cyberpunk */
 const GLYPHS = '█▓▒░<>/\\|[]{}#$%&*+=?01';
 
 function scramble(node, dur = .8) {
@@ -1130,7 +1119,6 @@ function scramble(node, dur = .8) {
   });
 }
 
-// los triggers de scramble se crean al final del script (después de los pins)
 const scrambleQueue = [];
 
 document.querySelectorAll('.tape, .mag, .exp-card span.text-xs, header a.font-anton').forEach(el => {
@@ -1139,7 +1127,6 @@ document.querySelectorAll('.tape, .mag, .exp-card span.text-xs, header a.font-an
 
   el.addEventListener('mouseenter', () => scramble(node, .6));
 
-  // hero, header y tarjetas tienen su entrada en otro lado
   if (el.closest('#home, header, .exp-card')) return;
 
   scrambleQueue.push({ el, node });
@@ -1150,7 +1137,6 @@ document.querySelectorAll('.menu-link').forEach(l => {
   node && l.addEventListener('mouseenter', () => scramble(node, .5));
 });
 
-/* B) Spray splat */
 function splat(x, y, n = 14) {
   for (let i = 0; i < n; i++) {
     const d = document.createElement('i');
@@ -1174,7 +1160,6 @@ function splat(x, y, n = 14) {
 
 window.addEventListener('pointerdown', e => splat(e.clientX, e.clientY));
 
-/* C + D) Neón y glitch de cara: solo con el hero en pantalla */
 const neon = gsap.timeline({ repeat: -1, repeatDelay: 3, delay: 2, paused: true })
   .to('p.font-marker.hero-fade', { opacity: .25, duration: .05 })
   .to('p.font-marker.hero-fade', { opacity: 1, duration: .05 })
@@ -1220,14 +1205,12 @@ whenVisible(document.getElementById('home'),
   () => { heroSeen = true;  syncHero(); },
   () => { heroSeen = false; syncHero(); }, .05);
 
-// scramble de botones, tapes y logo: al terminar la intro, no debajo del preloader
 intro.add(() => {
   document.querySelectorAll('#home .tape, #home .mag, header a.font-anton').forEach(el => {
     if (!el.children.length && el.firstChild) scramble(el.firstChild, 1);
   });
 }, '-=.4');
 
-/* E) RGB split por velocidad de scroll */
 const rgbTargets = gsap.utils.toArray('h1, section h2');
 const rgb = { v: 0, t: 0, last: '' };
 
@@ -1247,7 +1230,6 @@ gsap.ticker.add(() => {
   }
 });
 
-/* H) Sello slam */
 gsap.from('#stamp', {
   scale: 3,
   opacity: 0,
@@ -1267,7 +1249,6 @@ gsap.from('#stamp', {
   }
 });
 
-/* I) Tilt 3D en proyectos */
 if (matchMedia('(pointer: fine)').matches) {
   const ps = document.querySelector('.projSwiper');
 
@@ -1290,7 +1271,6 @@ if (matchMedia('(pointer: fine)').matches) {
   });
 }
 
-/* ===== J) SKILLS: blobs que suben con el scroll (pin) ===== */
 const blobs = gsap.utils.toArray('#blobField .blob');
 const MORPH = '58% 42% 55% 45% / 48% 56% 44% 52%';
 const DROP  = '50% 50% 50% 50% / 72% 72% 28% 28%';
@@ -1298,7 +1278,6 @@ const DROP  = '50% 50% 50% 50% / 72% 72% 28% 28%';
 const skillsEl = document.getElementById('skills');
 const skillHead = '#skills > p, #skills > h2';
 
-// título escondido hasta que la sección asome
 gsap.set(skillHead, { opacity: 0, y: 40 });
 
 const floats = [];
@@ -1320,19 +1299,16 @@ blobs.forEach(b => {
   }));
 });
 
-// entrada del título al ver el 15% de la sección; se reinicia si sales hacia arriba
 whenVisible(skillsEl,
   () => gsap.to(skillHead, { opacity: 1, y: 0, stagger: .15, duration: .8, ease: 'power3.out', overwrite: 'auto' }),
   e => { if (e.boundingClientRect.top > 0) gsap.set(skillHead, { opacity: 0, y: 40 }); },
   .15);
 
-// flotación: solo mientras la sección esté en pantalla (incluye todo el pin)
 whenVisible(skillsEl,
   () => floats.forEach(f => f.paused(false)),
   () => floats.forEach(f => f.paused(true)),
   0);
 
-// los blobs suben con el scroll, ya con la sección pegada
 const skillsTl = gsap.timeline({
   defaults: { ease: 'none' },
   scrollTrigger: {
@@ -1368,13 +1344,7 @@ gsap.utils.shuffle(blobs.slice()).forEach((b, i) => {
 
 skillsTl.to({}, { duration: 1 });
 
-/* =====================================================================
-   TODO LO DE ABAJO SE CREA DESPUÉS DE LOS 4 PINS (hero, proceso,
-   experiencia, habilidades). Así sus posiciones salen bien calculadas
-   y las animaciones arrancan cuando de verdad aparecen en pantalla.
-   ===================================================================== */
 
-// título de Proyectos
 gsap.utils.toArray('#projects h2').forEach(h => {
   gsap.from(h, {
     xPercent: -8,
@@ -1388,7 +1358,6 @@ gsap.utils.toArray('#projects h2').forEach(h => {
   });
 });
 
-// scramble de botones y etiquetas que están debajo de los pins
 scrambleQueue.forEach(({ el, node }) => {
   ScrollTrigger.create({
     trigger: el,
@@ -1410,9 +1379,6 @@ document.querySelectorAll('.menu-link').forEach(l => {
   });
 });
 
-/* ===== CONTACTO ===== */
-
-// HABLEMOS crece y aparece con el scroll
 gsap.from('#cta', {
   scale: .6,
   opacity: 0,
@@ -1425,7 +1391,6 @@ gsap.from('#cta', {
   }
 });
 
-// garabatos de contacto (se dibujan con un pequeño delay)
 document.querySelectorAll('#contact .scribble path').forEach(p => {
   const L = p.getTotalLength();
 
@@ -1443,7 +1408,6 @@ document.querySelectorAll('#contact .scribble path').forEach(p => {
   });
 });
 
-// goteos de pintura
 gsap.fromTo('.drips i',
   { scaleY: 0 },
   {
@@ -1460,7 +1424,6 @@ gsap.fromTo('.drips i',
   }
 );
 
-// glitch de HABLEMOS: se enciende un momento después de aparecer
 ScrollTrigger.create({
   trigger: '#cta',
   start: 'top 60%',
@@ -1468,14 +1431,12 @@ ScrollTrigger.create({
   onLeaveBack: () => document.querySelector('#contact .glitch').classList.remove('live')
 });
 
-/* ===== Recalcular posiciones al cargar (GSAP y AOS) ===== */
 window.addEventListener('load', () => {
   ScrollTrigger.refresh();
   AOS.refreshHard();
 });
 ScrollTrigger.addEventListener('refresh', () => AOS.refreshHard());
 
-/* ===== Swiper: autoplay solo con la sección en pantalla ===== */
 const projSwiper = new Swiper('.projSwiper', {
   slidesPerView: 'auto',
   spaceBetween: 24,
