@@ -5,7 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ArtDuZt | Arturo Díaz — Creative Developer</title>
 <meta name="description" content="Portafolio de Arturo Díaz: diseño web, branding y motion con actitud street.">
+<link rel="icon" type="image/png" href="https://artduzt-beep.github.io/cv_ArtDuZt/assets/img/300ppi/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+<link rel="preconnect" href="https://cdn.gtranslate.net" crossorigin>
+<link rel="preload" as="image" href="https://artduzt-beep.github.io/cv_ArtDuZt/assets/img/arturw.png" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Permanent+Marker&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
@@ -29,7 +35,8 @@ tailwind.config = { theme: { extend: {
 <div class="cursor" id="cursor"></div>
 <div class="fixed top-0 left-0 h-1 bg-paper z-[120] origin-left scale-x-0" id="progress" style="width: 100%"></div>
 <header class="fixed top-0 inset-x-0 z-[130] flex items-center justify-between px-5 md:px-10 py-5 mix-blend-difference text-white">
-  <a href="#home" translate="no" class="font-anton text-2xl tracking-wider">ArtDuZt</a>
+  <a href="#home" class="brand-logo" aria-label="ArtDuZt, inicio">
+    <img src="https://artduzt-beep.github.io/cv_ArtDuZt/assets/img/300ppi/logo.png" alt="ArtDuZt" width="150" height="50" fetchpriority="high"></a>
   <div class="flex items-center gap-4">
     <a href="#contact" class="hidden md:inline-block text-xs uppercase tracking-widest border border-white px-4 py-2 hover:bg-white hover:text-black transition">Hire me</a>
 
@@ -99,7 +106,7 @@ tailwind.config = { theme: { extend: {
     </nav>
     <div class="hidden md:flex flex-col gap-4">
       <div class="menu-extra relative flex-1 bg-ink overflow-hidden border-2 border-ink">
-        <img id="menuFace" src="https://artduzt-beep.github.io/cv_ArtDuZt/assets/img/arturw.png" alt="" class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[95%] w-auto max-w-none face">
+        <img id="menuFace" src="https://artduzt-beep.github.io/cv_ArtDuZt/assets/img/arturw.png" alt="" loading="lazy" decoding="async" class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[95%] w-auto max-w-none face">
         <span class="absolute top-3 left-3 tape px-2 py-1 text-[10px] uppercase tracking-widest -rotate-2">Creative Developer</span>
       </div>
       <p class="menu-extra font-marker text-2xl -rotate-1">// diseño que se pinta en la pared</p>
@@ -144,8 +151,8 @@ tailwind.config = { theme: { extend: {
 <section id="home" class="relative min-h-[100svh] overflow-hidden scan flex items-start md:items-end">
   <div id="heroGrid" class="absolute inset-x-0 -top-[20%] h-[140%] opacity-[.07]" style="background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 60px 60px"></div>
   <div id="faceWrap" class="absolute right-0 bottom-0 w-full h-[46svh] md:right-[5%] md:w-auto md:h-[calc(100svh-100px)] z-[1]">
-    <img src="https://artduzt-beep.github.io/cv_ArtDuZt/assets/img/arturw.png" alt="Arturo Díaz" class="face relative block h-full w-full object-contain object-right-bottom md:w-auto md:max-w-none" id="face">
-    <img src="https://artduzt-beep.github.io/cv_ArtDuZt/assets/img/arturw.png" alt="" aria-hidden="true" class="face absolute inset-0 h-full w-full object-contain object-right-bottom opacity-30 mix-blend-difference" id="faceGhost" style="transform: translate(10px, 0)">
+    <img src="https://artduzt-beep.github.io/cv_ArtDuZt/assets/img/arturw.png" alt="Arturo Díaz" fetchpriority="high" decoding="async" class="face relative block h-full w-full object-contain object-right-bottom md:w-auto md:max-w-none" id="face">
+    <img src="https://artduzt-beep.github.io/cv_ArtDuZt/assets/img/arturw.png" alt="" aria-hidden="true" loading="eager" decoding="async" class="face absolute inset-0 h-full w-full object-contain object-right-bottom opacity-30 mix-blend-difference" id="faceGhost" style="transform: translate(10px, 0)">
   </div>
   <div id="heroContent" class="relative z-[3] w-full px-5 md:px-10 pb-12 md:pb-20 pt-24 md:pt-28">
     <p class="font-marker text-xl md:text-3xl -rotate-3 mb-2 hero-fade">// diseño que se pinta en la pared</p>
@@ -182,9 +189,9 @@ tailwind.config = { theme: { extend: {
   <div id="stamp" class="inline-block mt-10 border-4 border-paper px-5 py-2 font-anton uppercase text-3xl md:text-5xl tracking-widest -rotate-6">100% Street · Sin filtros</div>
   <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-paper/30 mt-24 border border-paper/30">
     <div class="bg-ink p-6 md:p-10" data-aos="fade-up"><div class="font-anton text-6xl md:text-8xl" data-speed=".3"><span class="count" data-to="4">0</span>+</div><p class="text-xs uppercase tracking-widest mt-2 opacity-70">Años de experiencia</p></div>
-    <div class="bg-ink p-6 md:p-10" data-aos="fade-up" data-aos-delay="100"><div class="font-anton text-6xl md:text-8xl" data-speed="-.2"><span class="count" data-to="50">0</span>+</div><p class="text-xs uppercase tracking-widest mt-2 opacity-70">Landings & micrositios</p></div>
+    <div class="bg-ink p-6 md:p-10" data-aos="fade-up" data-aos-delay="100"><div class="font-anton text-6xl md:text-8xl" data-speed=".2"><span class="count" data-to="50">0</span>+</div><p class="text-xs uppercase tracking-widest mt-2 opacity-70">Landings & micrositios</p></div>
     <div class="bg-ink p-6 md:p-10" data-aos="fade-up" data-aos-delay="200"><div class="font-anton text-6xl md:text-8xl" data-speed=".5"><span class="count" data-to="5">0</span></div><p class="text-xs uppercase tracking-widest mt-2 opacity-70">Marcas construidas</p></div>
-    <div class="bg-ink p-6 md:p-10" data-aos="fade-up" data-aos-delay="300"><div class="font-anton text-6xl md:text-8xl" data-speed="-.4">∞</div><p class="text-xs uppercase tracking-widest mt-2 opacity-70">Café & pixeles</p></div>
+    <div class="bg-ink p-6 md:p-10" data-aos="fade-up" data-aos-delay="300"><div class="font-anton text-6xl md:text-8xl" data-speed=".4">∞</div><p class="text-xs uppercase tracking-widest mt-2 opacity-70">Café & pixeles</p></div>
   </div>
 </section>
 <section id="services" class="px-5 md:px-10 py-24">
@@ -289,23 +296,23 @@ tailwind.config = { theme: { extend: {
   <div class="swiper projSwiper !px-5 md:!px-10">
     <div class="swiper-wrapper">
       <a href="https://www.movil.gs/beneficiosparati/hazdeporte/mgs19034-muro" class="swiper-slide !w-[80vw] md:!w-[48vw] group">
-        <div class="overflow-hidden border border-paper/40 aspect-[16/10] bg-neutral-900"><img src="./assets/img/web.png" alt="Campaña Digital" class="w-full h-full object-cover"></div>
+        <div class="overflow-hidden border border-paper/40 aspect-[16/10] bg-neutral-900"><img src="./assets/img/web.png" alt="Campaña Digital" class="w-full h-full object-cover" loading="lazy" decoding="async"></div>
         <div class="flex justify-between mt-4 items-baseline"><h3 class="font-anton uppercase text-3xl md:text-5xl">Web Experience</h3><span class="text-xs tracking-widest">01 / WEB</span></div>
       </a>
       <a href="https://www.behance.net/gallery/207608877/Video-introductorio-SUZUKI" class="swiper-slide !w-[80vw] md:!w-[48vw] group">
-        <div class="overflow-hidden border border-paper/40 aspect-[16/10] bg-neutral-900"><img src="./assets/img/motion.png" alt="Motion Graphics" class="w-full h-full object-cover"></div>
+        <div class="overflow-hidden border border-paper/40 aspect-[16/10] bg-neutral-900"><img src="./assets/img/motion.png" alt="Motion Graphics" class="w-full h-full object-cover" loading="lazy" decoding="async"></div>
         <div class="flex justify-between mt-4 items-baseline"><h3 class="font-anton uppercase text-3xl md:text-5xl">Motion Suzuki</h3><span class="text-xs tracking-widest">02 / MOTION</span></div>
       </a>
       <a href="https://www.movil.gs/innovacion-2026/" class="swiper-slide !w-[80vw] md:!w-[48vw] group">
-        <div class="overflow-hidden border border-paper/40 aspect-[16/10] bg-neutral-900"><img src="./assets/img/innova.png" alt="Innovación 2026" class="w-full h-full object-cover"></div>
+        <div class="overflow-hidden border border-paper/40 aspect-[16/10] bg-neutral-900"><img src="./assets/img/innova.png" alt="Innovación 2026" class="w-full h-full object-cover" loading="lazy" decoding="async"></div>
         <div class="flex justify-between mt-4 items-baseline"><h3 class="font-anton uppercase text-3xl md:text-5xl">Innovación 2026</h3><span class="text-xs tracking-widest">03 / LANDING</span></div>
       </a>
       <a href="https://www.behance.net/gallery/202789505/Dental-Family-SANJUAN" class="swiper-slide !w-[80vw] md:!w-[48vw] group">
-        <div class="overflow-hidden border border-paper/40 aspect-[16/10] bg-neutral-900"><img src="./assets/img/sanjuan.png" alt="Dental Family" class="w-full h-full object-cover"></div>
+        <div class="overflow-hidden border border-paper/40 aspect-[16/10] bg-neutral-900"><img src="./assets/img/sanjuan.png" alt="Dental Family" class="w-full h-full object-cover" loading="lazy" decoding="async"></div>
         <div class="flex justify-between mt-4 items-baseline"><h3 class="font-anton uppercase text-3xl md:text-5xl">Dental Family</h3><span class="text-xs tracking-widest">04 / BRANDING</span></div>
       </a>
       <div class="swiper-slide !w-[80vw] md:!w-[48vw] group">
-        <div class="overflow-hidden border border-paper/40 aspect-[16/10] bg-neutral-900"><img src="./assets/img/3d.png" alt="3D" class="w-full h-full object-cover"></div>
+        <div class="overflow-hidden border border-paper/40 aspect-[16/10] bg-neutral-900"><img src="./assets/img/3d.png" alt="3D" class="w-full h-full object-cover" loading="lazy" decoding="async"></div>
         <div class="flex justify-between mt-4 items-baseline"><h3 class="font-anton uppercase text-3xl md:text-5xl">3D Lab</h3><span class="text-xs tracking-widest">05 / 3D</span></div>
       </div>
     </div>
