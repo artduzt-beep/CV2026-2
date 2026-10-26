@@ -7,95 +7,104 @@ function whenVisible(el, onIn, onOut, threshold = 0.1) {
   }, { threshold }).observe(el);
 }
 
-document.body.style.overflow = 'hidden'; //*
-AOS.init({ duration: 900, once: true, easing: 'ease-out-cubic', offset: 60 });
+document.body.style.overflow = 'hidden';
+AOS.init({ duration: 650, once: true, easing: 'ease-out-cubic', offset: 50, disable: 'mobile' });
 
 const cur = document.getElementById('cursor');
-const cx = gsap.quickTo(cur, 'x', { duration: .25, ease: 'power3' });
-const cy = gsap.quickTo(cur, 'y', { duration: .25, ease: 'power3' });
+const finePointer = window.matchMedia('(pointer: fine)').matches;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-window.addEventListener('mousemove', e => {
-  cx(e.clientX);
-  cy(e.clientY);
-});
+if (cur && finePointer) {
+  const cx = gsap.quickTo(cur, 'x', { duration: 0.16, ease: 'power2.out' });
+  const cy = gsap.quickTo(cur, 'y', { duration: 0.16, ease: 'power2.out' });
+  window.addEventListener('pointermove', e => {
+    if (e.pointerType !== 'touch') { cx(e.clientX); cy(e.clientY); }
+  }, { passive: true });
 
-document.querySelectorAll('a, button, .service-row').forEach(el => {
-  el.addEventListener('mouseenter', () => cur.classList.add('big'));
-  el.addEventListener('mouseleave', () => cur.classList.remove('big'));
-});
+  document.querySelectorAll('a, button, .service-row').forEach(el => {
+    el.addEventListener('pointerenter', () => cur.classList.add('big'));
+    el.addEventListener('pointerleave', () => cur.classList.remove('big'));
+  });
+}
 
-document.querySelectorAll('.mag').forEach(el => {
-  el.addEventListener('mousemove', e => {
-    const r = el.getBoundingClientRect();
-    gsap.to(el, {
-      x: (e.clientX - r.left - r.width / 2) * .3,
-      y: (e.clientY - r.top - r.height / 2) * .3,
-      duration: .3
+if (finePointer) {
+  document.querySelectorAll('.mag').forEach(el => {
+    let rect;
+    el.addEventListener('pointerenter', () => { rect = el.getBoundingClientRect(); });
+    el.addEventListener('pointermove', e => {
+      if (e.pointerType === 'touch') return;
+      rect = rect || el.getBoundingClientRect();
+      gsap.to(el, {
+        x: (e.clientX - rect.left - rect.width / 2) * 0.18,
+        y: (e.clientY - rect.top - rect.height / 2) * 0.18,
+        duration: 0.18,
+        overwrite: 'auto'
+      });
+    }, { passive: true });
+    el.addEventListener('pointerleave', () => {
+      rect = null;
+      gsap.to(el, { x: 0, y: 0, duration: 0.35, ease: 'power2.out', overwrite: 'auto' });
     });
   });
-
-  el.addEventListener('mouseleave', () => {
-    gsap.to(el, {
-      x: 0,
-      y: 0,
-      duration: .6,
-      ease: 'elastic.out(1,.4)'
-    });
-  });
-});
+}
 
 function splitWords(el) {
-  el.innerHTML = el.textContent.trim().split(/\s+/).map(w => `<span class="char" style="opacity: .12">${w}</span>`).join(' ');
+  el.innerHTML = el.textContent.trim().split(/\s+/).map(w => `<span class="char" style="opacity:.12">${w}</span>`).join(' ');
   return el.querySelectorAll('.char');
 }
 
 const counter = { v: 0 };
+const preloader = document.getElementById('preloader');
+const countEl = document.getElementById('count');
+const barEl = document.getElementById('bar');
 const intro = gsap.timeline({ paused: true });
 
 intro
   .from('#heroTitle .glitch, #heroTitle > span:nth-child(2) > span', {
-    yPercent: 120,
-    rotate: 4,
-    duration: 1.1,
-    ease: 'power4.out',
-    stagger: .15
+    yPercent: 110, rotate: 3, duration: 0.7, ease: 'power3.out', stagger: 0.08
   })
   .from('#faceWrap', {
-    yPercent: 25,
-    opacity: 0,
-    scale: 1.1,
-    duration: 1.4,
-    ease: 'power3.out'
-  }, '-=.9')
+    yPercent: 12, opacity: 0, scale: 1.04, duration: 0.75, ease: 'power2.out'
+  }, '-=0.45')
   .from('.hero-fade', {
-    y: 30,
-    opacity: 0,
-    stagger: .12,
-    duration: .8,
-    ease: 'power2.out'
-  }, '-=.8');
+    y: 18, opacity: 0, stagger: 0.06, duration: 0.45, ease: 'power2.out'
+  }, '-=0.35');
 
-gsap.timeline()
-  .to(counter, {
-    v: 100,
-    duration: 2.2,
-    ease: 'power2.inOut',
-    onUpdate: () => {
-      document.getElementById('count').textContent = Math.round(counter.v);
-      document.getElementById('bar').style.width = counter.v + '%';
-    }
-  })
-  .to('#preloader', {
+let introStarted = false;
+function revealPage() {
+  if (introStarted) return;
+  introStarted = true;
+  document.body.style.overflow = '';
+  document.documentElement.style.overflow = '';
+  if (!preloader) { intro.play(0); return; }
+  gsap.to(preloader, {
     yPercent: -100,
-    duration: .9,
-    ease: 'power4.inOut'
-  })
-  .add(() => {
-    intro.play();
-    document.body.style.overflow = '';
-    document.documentElement.style.overflow = '';
-    ScrollTrigger.refresh();
-  }, '-=.3');
+    duration: reduceMotion ? 0 : 0.32,
+    ease: 'power2.inOut',
+    onComplete: () => {
+      preloader.style.display = 'none';
+      intro.play(0);
+      requestAnimationFrame(() => ScrollTrigger.refresh());
+    }
+  });
+}
+
+// The loader is visual only: it must never wait for every image or third-party widget.
+if (preloader) {
+  gsap.to(counter, {
+    v: 100,
+    duration: reduceMotion ? 0 : 0.18,
+    ease: 'none',
+    onUpdate: () => {
+      if (countEl) countEl.textContent = Math.round(counter.v);
+      if (barEl) barEl.style.width = counter.v + '%';
+    },
+    onComplete: () => setTimeout(revealPage, 30)
+  });
+} else {
+  document.body.style.overflow = '';
+  intro.play(0);
+}
 
 gsap.to('#progress', {
   scaleX: 1,
@@ -107,24 +116,20 @@ gsap.to('#progress', {
   }
 });
 
-window.addEventListener('mousemove', e => {
-  const x = (e.clientX / innerWidth - .5);
-  const y = (e.clientY / innerHeight - .5);
-
-  gsap.to('#face', {
-    x: x * 30,
-    y: y * 20,
-    duration: 1,
-    ease: 'power2.out'
-  });
-
-  gsap.to('#faceGhost', {
-    x: 10 + x * 70,
-    y: y * 40,
-    duration: 1.2,
-    ease: 'power2.out'
-  });
-});
+if (finePointer) {
+  let pointerX = 0, pointerY = 0, parallaxQueued = false;
+  window.addEventListener('pointermove', e => {
+    if (e.pointerType === 'touch' || parallaxQueued) return;
+    pointerX = (e.clientX / innerWidth - 0.5);
+    pointerY = (e.clientY / innerHeight - 0.5);
+    parallaxQueued = true;
+    requestAnimationFrame(() => {
+      gsap.to('#face', { x: pointerX * 22, y: pointerY * 14, duration: 0.35, overwrite: 'auto' });
+      gsap.to('#faceGhost', { x: 10 + pointerX * 36, y: pointerY * 24, duration: 0.45, overwrite: 'auto' });
+      parallaxQueued = false;
+    });
+  }, { passive: true });
+}
 
 const heroK = innerWidth > 767 ? 1.08 : 1.02;
 
@@ -175,7 +180,7 @@ ScrollTrigger.create({
     gsap.to(mq, {
       timeScale: 1 + Math.abs(s.getVelocity()) / 250 * (s.direction),
       duration: .2,
-      overwrite: true
+      overwrite: 'auto'
     });
 
     gsap.to(mq, {
@@ -187,7 +192,7 @@ ScrollTrigger.create({
     gsap.to('#marquee', {
       skewX: gsap.utils.clamp(-12, 12, s.getVelocity() / -200),
       duration: .2,
-      overwrite: true
+      overwrite: 'auto'
     });
 
     gsap.to('#marquee', {
@@ -201,15 +206,16 @@ ScrollTrigger.create({
 const man = document.getElementById('manifesto');
 
 if (man) {
-  man.classList.add('reveal-text');
+  const words = splitWords(man);
 
-  gsap.fromTo(man, { '--p': -30 }, {
-    '--p': 100,
+  gsap.to(words, {
+    opacity: 1,
+    stagger: .15,
     ease: 'none',
     scrollTrigger: {
       trigger: man,
       start: 'top 80%',
-      end: 'bottom 50%',
+      end: 'bottom 55%',
       scrub: true
     }
   });
@@ -292,7 +298,7 @@ const hs = gsap.to(track, {
     end: () => '+=' + dist(),
     pin: true,
     scrub: 1,
-    invalidateOnRefresh: true,
+        invalidateOnRefresh: true,
     anticipatePin: 1
   }
 });
@@ -571,7 +577,9 @@ function splat(x, y, n = 14) {
   }
 }
 
-window.addEventListener('pointerdown', e => splat(e.clientX, e.clientY));
+if (finePointer && !reduceMotion) {
+  window.addEventListener('pointerdown', e => { if (e.pointerType !== 'touch') splat(e.clientX, e.clientY, 8); }, { passive: true });
+}
 
 const neon = gsap.timeline({ repeat: -1, repeatDelay: 3, delay: 2, paused: true })
   .to('p.font-marker.hero-fade', { opacity: .25, duration: .05 })
@@ -590,7 +598,7 @@ function faceBurst() {
       .to('#face', { clipPath: 'inset(20% 0% 55% 0%)', duration: .04 }, 0)
       .to('#face', { clipPath: 'inset(60% 0% 10% 0%)', duration: .04 })
       .to('#face', { clipPath: 'inset(0% 0% 0% 0%)', duration: .04 })
-      .to('#faceGhost', { skewX: 0, opacity: .3, duration: .12 });
+            .to('#faceGhost', { skewX: 0, opacity: .3, duration: .12 });
   });
 }
 
@@ -625,23 +633,21 @@ intro.add(() => {
 }, '-=.4');
 
 const rgbTargets = gsap.utils.toArray('h1, section h2');
-const rgb = { v: 0, t: 0, last: '' };
-
-ScrollTrigger.create({
-  onUpdate: s => rgb.t = gsap.utils.clamp(-24, 24, s.getVelocity() / 80)
-});
-
-gsap.ticker.add(() => {
-  rgb.t *= .9;
-  rgb.v += (rgb.t - rgb.v) * .2;
-
-  const str = Math.abs(rgb.v) < .3 ? '' : `${rgb.v}px 0 rgba(255,255,255,.55), ${-rgb.v}px 0 rgba(130,130,130,.55)`;
-
-  if (str !== rgb.last) {
-    rgb.last = str;
-    rgbTargets.forEach(el => el.style.textShadow = str);
-  }
-});
+let rgbFrame = 0;
+if (!reduceMotion) {
+  ScrollTrigger.create({
+    onUpdate: self => {
+      if (rgbFrame) cancelAnimationFrame(rgbFrame);
+      const velocity = gsap.utils.clamp(-10, 10, self.getVelocity() / 180);
+      rgbFrame = requestAnimationFrame(() => {
+        const shadow = Math.abs(velocity) < 0.5 ? '' : `${velocity}px 0 rgba(255,255,255,.35), ${-velocity}px 0 rgba(130,130,130,.35)`;
+        rgbTargets.forEach(el => { el.style.textShadow = shadow; });
+        rgbFrame = 0;
+      });
+    },
+    onStop: () => rgbTargets.forEach(el => { el.style.textShadow = ''; })
+  });
+}
 
 gsap.from('#stamp', {
   scale: 3,
@@ -665,7 +671,7 @@ gsap.from('#stamp', {
 if (matchMedia('(pointer: fine)').matches) {
   const ps = document.querySelector('.projSwiper');
 
-  ps.addEventListener('mousemove', e => {
+  if (ps) ps.addEventListener('mousemove', e => {
     const s = e.target.closest('.swiper-slide');
     if (!s) return;
     const r = s.getBoundingClientRect();
@@ -678,7 +684,7 @@ if (matchMedia('(pointer: fine)').matches) {
     });
   });
 
-  ps.addEventListener('mouseout', e => {
+  if (ps) ps.addEventListener('mouseout', e => {
     const s = e.target.closest('.swiper-slide');
     if (s && !s.contains(e.relatedTarget)) gsap.to(s, { rotationX: 0, rotationY: 0, duration: .6 });
   });
@@ -846,11 +852,12 @@ ScrollTrigger.create({
 
 window.addEventListener('load', () => {
   ScrollTrigger.refresh();
-  AOS.refreshHard();
+  if (window.AOS) AOS.refreshHard();
 });
-ScrollTrigger.addEventListener('refresh', () => AOS.refreshHard());
+ScrollTrigger.addEventListener('refresh', () => { if (window.AOS) AOS.refreshHard(); });
 
-const projSwiper = new Swiper('.projSwiper', {
+const projSwiperEl = document.querySelector('.projSwiper');
+const projSwiper = projSwiperEl ? new Swiper(projSwiperEl, {
   slidesPerView: 'auto',
   spaceBetween: 24,
   grabCursor: true,
@@ -869,12 +876,13 @@ const projSwiper = new Swiper('.projSwiper', {
     nextEl: '.next',
     prevEl: '.prev'
   },
-  mousewheel: {
-    forceToAxis: true
-  }
-});
+  mousewheel: { forceToAxis: true }
+}) : null;
 
-projSwiper.autoplay.stop();
-whenVisible(document.getElementById('projects'),
-  () => projSwiper.autoplay.start(),
-  () => projSwiper.autoplay.stop(), .2);
+if (projSwiper) {
+  projSwiper.autoplay.stop();
+  const projectsSection = document.getElementById('projects');
+  if (projectsSection) whenVisible(projectsSection,
+    () => projSwiper.autoplay.start(),
+    () => projSwiper.autoplay.stop(), 0.2);
+}
