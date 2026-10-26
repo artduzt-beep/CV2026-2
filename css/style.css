@@ -365,10 +365,11 @@ p.font-marker.hero-fade {
 
 #manifesto.reveal-text {
   background: linear-gradient(180deg,
-    #f2f2f2 calc(var(--p, -30) \* 1%),
-    rgba(242,242,242,.12) calc(var(--p, -30) \* 1% + 25%));
+    #f2f2f2 calc(var(--p, -30) * 1%),
+    rgba(242,242,242,.12) calc(var(--p, -30) * 1% + 25%));
   -webkit-background-clip: text;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
   color: transparent;
 }
 
@@ -668,8 +669,15 @@ header.fixed .language-trigger:hover {
   cursor: inherit;
   transition: background .2s, color .2s;
 }
-.exp-open[data-tone="light"]:hover { background: #050505; color: #f2f2f2; }
-.exp-open[data-tone="dark"]:hover  { background: #f2f2f2; color: #050505; }
+.exp-open[data-tone="light"]:hover { 
+  background: #050505; 
+  color: #f2f2f2; 
+}
+
+.exp-open[data-tone="dark"]:hover  { 
+  background: #f2f2f2; 
+  color: #050505; 
+}
 
 .exp-modal {
   position: fixed;
@@ -681,7 +689,12 @@ header.fixed .language-trigger:hover {
   padding: 16px;
   visibility: hidden;
 }
-.exp-modal__backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.88); }
+.exp-modal__backdrop { 
+  position: absolute; 
+  inset: 0; 
+  background: rgba(0,0,0,.88); 
+}
+
 .exp-modal__panel {
   position: relative;
   display: grid;
@@ -706,7 +719,11 @@ header.fixed .language-trigger:hover {
   font-size: 18px;
   cursor: inherit;
 }
-.exp-modal__close:hover { background: #050505; color: #f2f2f2; outline: 1px solid #f2f2f2; }
+.exp-modal__close:hover { 
+  background: #050505; 
+  color: #f2f2f2; 
+  outline: 1px solid #f2f2f2; 
+}
 
 .exp-modal__media {
   display: flex;
@@ -716,10 +733,29 @@ header.fixed .language-trigger:hover {
   background: #0d0d0d;
   border-right: 2px solid #f2f2f2;
 }
-.exp-modal__stage { position: relative; flex: 1; min-height: 0; }
-.expSwiper { position: absolute; inset: 0; }
-.expSwiper .swiper-slide { height: 100%; overflow: hidden; }
-.expSwiper .swiper-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.exp-modal__stage { 
+  position: relative; 
+  flex: 1; 
+  min-height: 0; 
+}
+
+.expSwiper { 
+  position: absolute; 
+  inset: 0; 
+}
+
+.expSwiper .swiper-slide { 
+  height: 100%; 
+  overflow: hidden; 
+}
+
+.expSwiper .swiper-slide img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  display: block; 
+}
+
 .exp-ph {
   width: 100%;
   height: 100%;
@@ -749,21 +785,92 @@ header.fixed .language-trigger:hover {
   cursor: inherit;
   transition: background .2s, color .2s;
 }
-.exp-modal__nav button:hover { background: #f2f2f2; color: #050505; }
-.exp-modal__nav .swiper-button-disabled { opacity: .3; pointer-events: none; }
-.exp-pagination { display: flex; align-items: center; }
+.exp-modal__nav button:hover { 
+  background: #f2f2f2; 
+  color: #050505; 
+}
 
-.exp-modal__info { min-width: 0; padding: 32px; overflow-y: auto; overscroll-behavior: contain; }
-.exp-modal__date { font-size: 12px; letter-spacing: .15em; text-transform: uppercase; }
-.exp-modal__company { margin-top: 8px; font-family: "Permanent Marker", cursive; font-size: 28px; transform: rotate(-2deg); transform-origin: left; }
-.exp-modal__title { margin-top: 8px; font-family: Anton, Impact, sans-serif; text-transform: uppercase; line-height: .95; font-size: clamp(32px, 4vw, 56px); }
-.exp-modal__desc { margin-top: 20px; font-size: 15px; line-height: 1.5; }
-.exp-modal__extra { margin-top: 12px; font-size: 14px; line-height: 1.5; opacity: .75; }
-.exp-modal__extra:empty { display: none; }
-.exp-modal__list { margin-top: 20px; font-size: 13px; }
-.exp-modal__list li { padding: 8px 0; border-bottom: 1px solid rgba(242,242,242,.3); }
-.exp-modal__tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
-.exp-modal__tags span { padding: 4px 12px; border: 1px solid #f2f2f2; font-size: 10px; letter-spacing: .15em; text-transform: uppercase; }
+.exp-modal__nav .swiper-button-disabled { 
+  opacity: .3; 
+  pointer-events: none; 
+}
+
+.exp-pagination { 
+  display: flex; 
+  align-items: center; 
+}
+
+.exp-modal__info { 
+  min-width: 0; 
+  padding: 32px; 
+  overflow-y: auto; 
+  overscroll-behavior: contain; 
+}
+
+.exp-modal__date { 
+  font-size: 12px; 
+  letter-spacing: .15em; 
+  text-transform: uppercase; 
+}
+
+.exp-modal__company { 
+  margin-top: 8px; 
+  font-family: "Permanent Marker", cursive; 
+  font-size: 28px; 
+  transform: rotate(-2deg); 
+  transform-origin: left; 
+}
+
+.exp-modal__title { 
+  margin-top: 8px; 
+  font-family: Anton, Impact, sans-serif; 
+  text-transform: uppercase; 
+  line-height: .95; 
+  font-size: clamp(32px, 4vw, 56px); 
+}
+
+.exp-modal__desc { 
+  margin-top: 20px; 
+  font-size: 15px; 
+  line-height: 1.5; 
+}
+
+.exp-modal__extra { 
+  margin-top: 12px; 
+  font-size: 14px; 
+  line-height: 1.5; 
+  opacity: .75; 
+}
+
+.exp-modal__extra:empty { 
+  display: none; 
+}
+
+.exp-modal__list { 
+  margin-top: 20px; 
+  font-size: 13px; 
+}
+
+.exp-modal__list li { 
+  padding: 8px 0; 
+  border-bottom: 1px solid rgba(242,242,242,.3); 
+}
+
+.exp-modal__tags { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 8px; 
+  margin-top: 20px; 
+}
+
+.exp-modal__tags span { 
+  padding: 4px 12px; 
+  border: 1px solid #f2f2f2; 
+  font-size: 10px; 
+  letter-spacing: .15em; 
+  text-transform: uppercase; 
+}
+
 .exp-modal__link {
   display: inline-block;
   margin-top: 24px;
@@ -776,13 +883,36 @@ header.fixed .language-trigger:hover {
   text-transform: uppercase;
   transition: background .2s, color .2s;
 }
-.exp-modal__link:hover { background: transparent; color: #f2f2f2; }
-.exp-modal__link[hidden] { display: none; }
+.exp-modal__link:hover { 
+  background: transparent; 
+  color: #f2f2f2;
+}
+
+.exp-modal__link[hidden] {
+  display: none;
+}
 
 @media (max-width: 767px) {
   .exp-modal { padding: 0; }
-  .exp-modal__panel { display: block; height: 100%; border: 0; overflow-y: auto; overscroll-behavior: contain; }
-  .exp-modal__media { border-right: 0; }
-  .exp-modal__stage { flex: none; aspect-ratio: 4 / 3; }
-  .exp-modal__info { overflow: visible; padding: 24px 20px 40px; }
+  .exp-modal__panel { 
+    display: block; 
+    height: 100%; 
+    border: 0; 
+    overflow-y: auto; 
+    overscroll-behavior: contain; 
+  }
+
+  .exp-modal__media { 
+    border-right: 0; 
+  }
+
+  .exp-modal__stage { 
+    flex: none; 
+    aspect-ratio: 4 / 3; 
+  }
+  .exp-modal__info { 
+    overflow: visible; 
+    padding: 24px 20px 40px; 
+  }
+
 }
