@@ -363,7 +363,7 @@ p.font-marker.hero-fade {
 
 }
 
-#manifesto.reveal-text {
+/*#manifesto.reveal-text {
   background: linear-gradient(180deg,
     #f2f2f2 calc(var(--p, -30) * 1%),
     rgba(242,242,242,.12) calc(var(--p, -30) * 1% + 25%));
@@ -371,7 +371,7 @@ p.font-marker.hero-fade {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-}
+}*/
 
 
 .skiptranslate iframe,
@@ -914,5 +914,21 @@ header.fixed .language-trigger:hover {
     overflow: visible; 
     padding: 24px 20px 40px; 
   }
+}
 
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.brand-logo img {
+  display: block;
+  width: auto;
+  height: 38px;
+  max-width: 150px;
+  object-fit: contain;
+  z-index: 100000000;
+  filter: invert(1);
 }
