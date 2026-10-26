@@ -7,7 +7,7 @@ function whenVisible(el, onIn, onOut, threshold = 0.1) {
   }, { threshold }).observe(el);
 }
 
-document.body.style.overflow = 'hidden';
+document.body.style.overflow = 'hidden'; //*
 AOS.init({ duration: 900, once: true, easing: 'ease-out-cubic', offset: 60 });
 
 const cur = document.getElementById('cursor');
@@ -93,6 +93,7 @@ gsap.timeline()
   .add(() => {
     intro.play();
     document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
     ScrollTrigger.refresh();
   }, '-=.3');
 
@@ -197,16 +198,12 @@ ScrollTrigger.create({
   }
 });
 
-gsap.to(splitWords(document.getElementById('manifesto')), {
-  opacity: 1,
-  stagger: .1,
+const man = document.getElementById('manifesto');
+man.classList.add('reveal-text');
+gsap.fromTo(man, { '--p': -30 }, {
+  '--p': 100,
   ease: 'none',
-  scrollTrigger: {
-    trigger: '#manifesto',
-    start: 'top 80%',
-    end: 'bottom 50%',
-    scrub: true
-  }
+  scrollTrigger: { trigger: man, start: 'top 80%', end: 'bottom 50%', scrub: true }
 });
 
 document.querySelectorAll('.count').forEach(el => {
@@ -275,7 +272,7 @@ document.querySelectorAll('#services .scribble path').forEach(p => {
 });
 
 const track = document.getElementById('processTrack');
-const dist = () => track.scrollWidth - innerWidth;
+const dist = () => Math.max(0, track.scrollWidth - window.innerWidth);
 
 const hs = gsap.to(track, {
   x: () => -dist(),
@@ -507,6 +504,9 @@ document.querySelectorAll('.menu-link').forEach(l => {
 const GLYPHS = '█▓▒░<>/\\|[]{}#$%&*+=?01';
 
 function scramble(node, dur = .8) {
+  const cl = document.documentElement.classList;
+  if (cl.contains('translated-ltr') || cl.contains('translated-rtl')) return;
+  if (!node) return;
   const o = node._o || (node._o = node.textContent);
   const st = { p: 0 };
 
