@@ -199,12 +199,21 @@ ScrollTrigger.create({
 });
 
 const man = document.getElementById('manifesto');
-man.classList.add('reveal-text');
-gsap.fromTo(man, { '--p': -30 }, {
-  '--p': 100,
-  ease: 'none',
-  scrollTrigger: { trigger: man, start: 'top 80%', end: 'bottom 50%', scrub: true }
-});
+
+if (man) {
+  man.classList.add('reveal-text');
+
+  gsap.fromTo(man, { '--p': -30 }, {
+    '--p': 100,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: man,
+      start: 'top 80%',
+      end: 'bottom 50%',
+      scrub: true
+    }
+  });
+}
 
 document.querySelectorAll('.count').forEach(el => {
   const o = { v: 0 };
