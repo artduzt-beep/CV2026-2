@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
 <link rel="stylesheet" href="css/style.css">
 <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-<script src="js/script.js"></script>
+<script src="js/script.js" defer></script>
 <script>
 tailwind.config = { theme: { extend: {
   fontFamily: { anton: ['Anton','Impact','sans-serif'], marker: ['"Permanent Marker"','cursive'], mono: ['"Space Mono"','monospace'] },
@@ -22,21 +22,69 @@ tailwind.config = { theme: { extend: {
 </head>
 <body class="grain font-mono antialiased">
 <div id="preloader" class="fixed inset-0 z-[150] bg-paper text-ink flex flex-col justify-between p-6 md:p-10">
-  <div class="flex justify-between text-xs uppercase tracking-widest"><span>ArtDuZt_OS v2.6</span><span>Booting...</span></div>
-  <div class="font-anton leading-none text-[28vw] md:text-[20vw]"><span id="count">0</span><span class="text-[10vw]">%</span></div>
+  <div translate="no" class="flex justify-between text-xs uppercase tracking-widest"><span>ArtDuZt_OS v2.6</span><span>Booting...</span></div>
+  <div translate="no" class="font-anton leading-none text-[28vw] md:text-[20vw]"><span id="count">0</span><span class="text-[10vw]">%</span></div>
   <div class="h-1 bg-ink/20"><div id="bar" class="h-full w-0 bg-ink"></div></div>
 </div>
 <div class="cursor" id="cursor"></div>
 <div class="fixed top-0 left-0 h-1 bg-paper z-[120] origin-left scale-x-0" id="progress" style="width: 100%"></div>
 <header class="fixed top-0 inset-x-0 z-[130] flex items-center justify-between px-5 md:px-10 py-5 mix-blend-difference text-white">
-  <a href="#home" class="font-anton text-2xl tracking-wider">ArtDuZt</a>
+  <a href="#home" translate="no" class="font-anton text-2xl tracking-wider">ArtDuZt</a>
   <div class="flex items-center gap-4">
     <a href="#contact" class="hidden md:inline-block text-xs uppercase tracking-widest border border-white px-4 py-2 hover:bg-white hover:text-black transition">Hire me</a>
+
     <button id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu" class="w-12 h-12 border border-white flex flex-col items-center justify-center gap-[6px]">
       <span class="burger-line block w-6 h-[2px] bg-white"></span><span class="burger-line block w-6 h-[2px] bg-white"></span>
     </button>
   </div>
 </header>
+<div class="language-picker" id="languagePicker" translate="no">
+      <button
+        class="language-trigger"
+        id="languageTrigger"
+        type="button"
+        aria-expanded="false"
+        aria-haspopup="listbox"
+        aria-label="Seleccionar idioma"
+      >
+        <svg class="language-globe" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <circle cx="24" cy="24" r="20"/>
+          <ellipse cx="24" cy="24" rx="9" ry="20"/>
+          <path d="M5 24h38M9 14h30M9 34h30"/>
+        </svg>
+        <span class="language-trigger-label">Español</span>
+      </button>
+
+      <div class="language-menu" id="languageMenu" role="listbox" aria-label="Idiomas">
+        <button type="button" class="language-option is-selected" data-lang="es" role="option" aria-selected="true">
+          <span class="language-code">ES</span><span>Español</span>
+        </button>
+        <button type="button" class="language-option" data-lang="en" role="option" aria-selected="false">
+          <span class="language-code">EN</span><span>English</span>
+        </button>
+        <button type="button" class="language-option" data-lang="fr" role="option" aria-selected="false">
+          <span class="language-code">FR</span><span>Français</span>
+        </button>
+        <button type="button" class="language-option" data-lang="de" role="option" aria-selected="false">
+          <span class="language-code">DE</span><span>Deutsch</span>
+        </button>
+        <button type="button" class="language-option" data-lang="it" role="option" aria-selected="false">
+          <span class="language-code">IT</span><span>Italiano</span>
+        </button>
+        <button type="button" class="language-option" data-lang="pt" role="option" aria-selected="false">
+          <span class="language-code">PT</span><span>Português</span>
+        </button>
+        <button type="button" class="language-option" data-lang="ja" role="option" aria-selected="false">
+          <span class="language-code">JA</span><span>日本語</span>
+        </button>
+        <button type="button" class="language-option" data-lang="ko" role="option" aria-selected="false">
+          <span class="language-code">KO</span><span>한국어</span>
+        </button>
+        <button type="button" class="language-option" data-lang="zh-CN" role="option" aria-selected="false">
+          <span class="language-code">ZH</span><span>简体中文</span>
+        </button>
+      </div>
+    </div>
 <div id="menu" class="fixed inset-0 z-[125] bg-paper text-ink overflow-y-auto" aria-hidden="true">
   <div class="min-h-full grid md:grid-cols-[1.25fr_1fr] gap-8 px-5 md:px-10 pt-28 pb-8">
     <nav class="flex flex-col justify-center" aria-label="Principal">
@@ -63,6 +111,35 @@ tailwind.config = { theme: { extend: {
     </div>
   </div>
 </div>
+<div id="expModal" class="exp-modal" role="dialog" aria-modal="true" aria-labelledby="expModalTitle" aria-hidden="true">
+  <div class="exp-modal__backdrop" data-close></div>
+  <div class="exp-modal__panel">
+    <button type="button" class="exp-modal__close" data-close aria-label="Cerrar">✕</button>
+
+    <div class="exp-modal__media">
+      <div class="exp-modal__stage">
+        <div class="swiper expSwiper"><div class="swiper-wrapper" id="expSlides"></div></div>
+      </div>
+      <div class="exp-modal__nav" id="expNav">
+        <button type="button" class="exp-prev" aria-label="Anterior">←</button>
+        <div class="exp-pagination"></div>
+        <button type="button" class="exp-next" aria-label="Siguiente">→</button>
+      </div>
+    </div>
+
+    <div class="exp-modal__info">
+      <span class="exp-modal__date" id="expModalDate"></span>
+      <div class="exp-modal__company" id="expModalCompany"></div>
+      <h3 class="exp-modal__title" id="expModalTitle"></h3>
+      <p class="exp-modal__desc" id="expModalDesc"></p>
+      <p class="exp-modal__extra" id="expModalExtra"></p>
+      <ul class="exp-modal__list" id="expModalList"></ul>
+      <div class="exp-modal__tags" id="expModalTags"></div>
+      <a class="exp-modal__link" id="expModalLink" href="#" target="_blank" rel="noopener noreferrer" hidden>Ver caso completo →</a>
+    </div>
+  </div>
+</div>
+
 <main>
 <section id="home" class="relative min-h-[100svh] overflow-hidden scan flex items-start md:items-end">
   <div id="heroGrid" class="absolute inset-x-0 -top-[20%] h-[140%] opacity-[.07]" style="background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 60px 60px"></div>
@@ -72,9 +149,9 @@ tailwind.config = { theme: { extend: {
   </div>
   <div id="heroContent" class="relative z-[3] w-full px-5 md:px-10 pb-12 md:pb-20 pt-24 md:pt-28">
     <p class="font-marker text-xl md:text-3xl -rotate-3 mb-2 hero-fade">// diseño que se pinta en la pared</p>
-    <h1 class="font-anton uppercase leading-[.82] text-[22vw] md:text-[17vw] mix-blend-difference" id="heroTitle">
-      <span class="block overflow-hidden"><span class="glitch" data-text="ARTURO">ARTURO</span></span>
-      <span class="block overflow-hidden outline-text md:ml-[8vw]"><span>DÍAZ.</span></span>
+    <h1 translate="no" class="font-anton uppercase leading-[.82] text-[22vw] md:text-[17vw] mix-blend-difference" id="heroTitle">
+      <span class="block overflow-visible"><span class="glitch" data-text="ARTURO">ARTURO</span></span>
+      <span class="block overflow-visible outline-text md:ml-[8vw]"><span>DÍAZ.</span></span>
     </h1>
     <div class="mt-8 flex flex-wrap items-center gap-4 hero-fade">
       <span class="tape px-3 py-1 text-xs uppercase tracking-widest rotate-[-2deg]">Web</span>
@@ -248,27 +325,27 @@ tailwind.config = { theme: { extend: {
     </div>
     <article class="exp-card absolute inset-x-3 md:inset-x-10 top-20 md:top-24 bottom-4 md:bottom-6 border-2 border-paper bg-paper text-ink overflow-hidden p-5 md:p-10 grid md:grid-cols-[1fr_1.6fr] gap-4 md:gap-10 content-start md:content-center">
       <span class="absolute right-2 md:right-6 -bottom-4 md:-bottom-14 font-anton leading-none text-[38vw] md:text-[24vw] opacity-10 select-none pointer-events-none">01</span>
-      <div class="relative"><span class="text-xs uppercase tracking-widest">NOV 2024 — HOY</span><div class="font-marker text-xl md:text-3xl mt-2 -rotate-2">Grupo Salinas</div><h3 class="font-anton uppercase text-4xl md:text-7xl leading-[.95] mt-2">Diseñador Web</h3></div>
+      <div class="relative"><span class="text-xs uppercase tracking-widest">NOV 2024 — HOY</span><div class="font-marker text-xl md:text-3xl mt-2 -rotate-2" translate="no">Grupo Salinas</div><h3 class="font-anton uppercase text-4xl md:text-7xl leading-[.95] mt-2">Diseñador Web</h3></div>
       <div class="relative"><p class="text-sm md:text-lg">Páginas y piezas digitales para campañas comerciales con enfoque en marketing, jerarquía visual y usabilidad.</p><ul class="mt-4 space-y-2 text-xs md:text-base"><li class="border-b border-current/30 pb-2">→ Diseño y desarrollo web para campañas.</li><li class="border-b border-current/30 pb-2">→ Colaboración con equipo creativo y comunicación interna.</li><li class="border-b border-current/30 pb-2">→ Soluciones visuales alineadas a objetivos de marca.</li></ul><div class="mt-5 flex flex-wrap gap-2"><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Web</span><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Marketing</span><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">UX/UI</span></div></div>
     </article>
     <article class="exp-card absolute inset-x-3 md:inset-x-10 top-20 md:top-24 bottom-4 md:bottom-6 border-2 border-paper bg-[#0d0d0d] text-paper overflow-hidden p-5 md:p-10 grid md:grid-cols-[1fr_1.6fr] gap-4 md:gap-10 content-start md:content-center">
       <span class="absolute right-2 md:right-6 -bottom-4 md:-bottom-14 font-anton leading-none text-[38vw] md:text-[24vw] opacity-10 select-none pointer-events-none">02</span>
-      <div class="relative"><span class="text-xs uppercase tracking-widest">ABR 2025</span><div class="font-marker text-xl md:text-3xl mt-2 -rotate-2">Dulce Díar</div><h3 class="font-anton uppercase text-4xl md:text-7xl leading-[.95] mt-2">Diseñador de Branding</h3></div>
+      <div class="relative"><span class="text-xs uppercase tracking-widest">ABR 2025</span><div class="font-marker text-xl md:text-3xl mt-2 -rotate-2" translate="no">Dulce Día</div><h3 class="font-anton uppercase text-4xl md:text-7xl leading-[.95] mt-2">Diseñador de Branding</h3></div>
       <div class="relative"><p class="text-sm md:text-lg">Construcción de identidad visual desde concepto hasta aplicación para una marca gastronómica.</p><ul class="mt-4 space-y-2 text-xs md:text-base"><li class="border-b border-current/30 pb-2">→ Concepto de identidad visual.</li><li class="border-b border-current/30 pb-2">→ Paleta, estilo y lineamientos.</li><li class="border-b border-current/30 pb-2">→ Materiales alineados a la personalidad del negocio.</li></ul><div class="mt-5 flex flex-wrap gap-2"><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Branding</span><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Identidad</span><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Concepto</span></div></div>
     </article>
     <article class="exp-card absolute inset-x-3 md:inset-x-10 top-20 md:top-24 bottom-4 md:bottom-6 border-2 border-paper bg-paper text-ink overflow-hidden p-5 md:p-10 grid md:grid-cols-[1fr_1.6fr] gap-4 md:gap-10 content-start md:content-center">
       <span class="absolute right-2 md:right-6 -bottom-4 md:-bottom-14 font-anton leading-none text-[38vw] md:text-[24vw] opacity-10 select-none pointer-events-none">03</span>
-      <div class="relative"><span class="text-xs uppercase tracking-widest">JUL — SEP 2024</span><div class="font-marker text-xl md:text-3xl mt-2 -rotate-2">Dental Family San Juan</div><h3 class="font-anton uppercase text-4xl md:text-7xl leading-[.95] mt-2">Diseñador de Branding</h3></div>
+      <div class="relative"><span class="text-xs uppercase tracking-widest">JUL — SEP 2024</span><div class="font-marker text-xl md:text-3xl mt-2 -rotate-2" translate="no">Dental Family San Juan</div><h3 class="font-anton uppercase text-4xl md:text-7xl leading-[.95] mt-2">Diseñador de Branding</h3></div>
       <div class="relative"><p class="text-sm md:text-lg">Identidad y sistema visual con enfoque comercial para mejorar la consistencia de marca.</p><ul class="mt-4 space-y-2 text-xs md:text-base"><li class="border-b border-current/30 pb-2">→ Creación de identidad de marca.</li><li class="border-b border-current/30 pb-2">→ Aplicación en distintos formatos.</li><li class="border-b border-current/30 pb-2">→ Adaptación visual a objetivos comerciales.</li></ul><div class="mt-5 flex flex-wrap gap-2"><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Branding</span><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Sistema Visual</span><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Comunicación</span></div></div>
     </article>
     <article class="exp-card absolute inset-x-3 md:inset-x-10 top-20 md:top-24 bottom-4 md:bottom-6 border-2 border-paper bg-[#0d0d0d] text-paper overflow-hidden p-5 md:p-10 grid md:grid-cols-[1fr_1.6fr] gap-4 md:gap-10 content-start md:content-center">
       <span class="absolute right-2 md:right-6 -bottom-4 md:-bottom-14 font-anton leading-none text-[38vw] md:text-[24vw] opacity-10 select-none pointer-events-none">04</span>
-      <div class="relative"><span class="text-xs uppercase tracking-widest">ABR — AGO 2024</span><div class="font-marker text-xl md:text-3xl mt-2 -rotate-2">Suzuki</div><h3 class="font-anton uppercase text-4xl md:text-7xl leading-[.95] mt-2">Diseñador Gráfico y Web</h3></div>
+      <div class="relative"><span class="text-xs uppercase tracking-widest">ABR — AGO 2024</span><div class="font-marker text-xl md:text-3xl mt-2 -rotate-2" translate="no">Suzuki</div><h3 class="font-anton uppercase text-4xl md:text-7xl leading-[.95] mt-2">Diseñador Gráfico y Web</h3></div>
       <div class="relative"><p class="text-sm md:text-lg">Contenido gráfico, web y motion para campañas, comunicación comercial y presencia digital.</p><ul class="mt-4 space-y-2 text-xs md:text-base"><li class="border-b border-current/30 pb-2">→ Contenido para redes, flyers y piezas promocionales.</li><li class="border-b border-current/30 pb-2">→ Diseño y estructura web para iniciativas comerciales.</li><li class="border-b border-current/30 pb-2">→ Motion graphics y visuales por temporada.</li></ul><div class="mt-5 flex flex-wrap gap-2"><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Diseño Gráfico</span><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Web</span><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Motion</span></div></div>
     </article>
     <article class="exp-card absolute inset-x-3 md:inset-x-10 top-20 md:top-24 bottom-4 md:bottom-6 border-2 border-paper bg-paper text-ink overflow-hidden p-5 md:p-10 grid md:grid-cols-[1fr_1.6fr] gap-4 md:gap-10 content-start md:content-center">
       <span class="absolute right-2 md:right-6 -bottom-4 md:-bottom-14 font-anton leading-none text-[38vw] md:text-[24vw] opacity-10 select-none pointer-events-none">05</span>
-      <div class="relative"><span class="text-xs uppercase tracking-widest">ABR 2022 — ABR 2024</span><div class="font-marker text-xl md:text-3xl mt-2 -rotate-2">UAEMéx</div><h3 class="font-anton uppercase text-4xl md:text-7xl leading-[.95] mt-2">Diseñador Gráfico y Técnico</h3></div>
+      <div class="relative"><span class="text-xs uppercase tracking-widest">ABR 2022 — ABR 2024</span><div class="font-marker text-xl md:text-3xl mt-2 -rotate-2" translate="no">UAEMéx</div><h3 class="font-anton uppercase text-4xl md:text-7xl leading-[.95] mt-2">Diseñador Gráfico y Técnico</h3></div>
       <div class="relative"><p class="text-sm md:text-lg">Materiales institucionales, contenido editorial y apoyo visual para comunicación interna y estudiantil.</p><ul class="mt-4 space-y-2 text-xs md:text-base"><li class="border-b border-current/30 pb-2">→ Materiales institucionales y formatos oficiales.</li><li class="border-b border-current/30 pb-2">→ Contenido gráfico y campañas internas.</li><li class="border-b border-current/30 pb-2">→ Cobertura fotográfica y edición.</li></ul><div class="mt-5 flex flex-wrap gap-2"><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Editorial</span><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Fotografía</span><span class="border border-current px-3 py-1 text-[10px] uppercase tracking-widest">Institucional</span></div></div>
     </article>
   </div>
@@ -317,5 +394,318 @@ tailwind.config = { theme: { extend: {
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+(() => {
+  const modal = document.getElementById('expModal');
+  if (!modal) return;
+  const EXP = [
+    { images: ['./assets/img/exp/salinas-1.jpg', './assets/img/exp/salinas-2.jpg', './assets/img/exp/salinas-3.jpg'] },
+    { images: ['./assets/img/exp/dulce-1.jpg'] },
+    { images: [] },
+    { images: ['./assets/img/exp/suzuki-1.jpg', './assets/img/exp/suzuki-2.jpg'] },
+    { images: [] }
+  ];
+
+  const $ = id => document.getElementById(id);
+  const panel = modal.querySelector('.exp-modal__panel');
+  const backdrop = modal.querySelector('.exp-modal__backdrop');
+  const cards = [...document.querySelectorAll('.exp-card')];
+  const cur = document.getElementById('cursor');
+  let swiper = null, lastFocus = null, isOpen = false;
+
+  cards.forEach((card, i) => {
+    const [, right] = card.querySelectorAll(':scope > div');
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'exp-open';
+    btn.dataset.tone = card.classList.contains('text-paper') ? 'dark' : 'light';
+    btn.innerHTML = 'Conoce más <span aria-hidden="true">+</span>';
+    btn.addEventListener('click', () => open(i, btn));
+    btn.addEventListener('mouseenter', () => cur && cur.classList.add('big'));
+    btn.addEventListener('mouseleave', () => cur && cur.classList.remove('big'));
+    right.appendChild(btn);
+  });
+
+  function open(i, trigger) {
+    const d = EXP[i] || {};
+    if (d.mode === 'page' && d.url) { location.href = d.url; return; }
+
+    const [left, right] = cards[i].querySelectorAll(':scope > div');
+    const dateNode = left.querySelector('span').firstChild;
+    const role = left.querySelector('h3').textContent;
+    const company = left.querySelector('.font-marker').textContent;
+
+    $('expModalDate').textContent = dateNode._o || dateNode.textContent;
+    $('expModalCompany').textContent = company;
+    $('expModalTitle').textContent = role;
+    $('expModalDesc').textContent = right.querySelector('p').textContent;
+    $('expModalExtra').textContent = d.extra || '';
+
+    const list = $('expModalList'); list.innerHTML = '';
+    right.querySelectorAll('li').forEach(li => {
+      const n = document.createElement('li'); n.textContent = li.textContent; list.appendChild(n);
+    });
+
+    const tags = $('expModalTags'); tags.innerHTML = '';
+    right.querySelectorAll('.flex > span').forEach(t => {
+      const n = document.createElement('span'); n.textContent = t.textContent; tags.appendChild(n);
+    });
+
+    const link = $('expModalLink');
+    link.hidden = !d.url;
+    if (d.url) link.href = d.url;
+
+    const wrap = $('expSlides'); wrap.innerHTML = '';
+    const imgs = d.images || [];
+    if (imgs.length) {
+      imgs.forEach(src => {
+        const s = document.createElement('div'); s.className = 'swiper-slide';
+        const im = document.createElement('img'); im.src = src; im.alt = role + ' — ' + company; im.loading = 'lazy';
+        s.appendChild(im); wrap.appendChild(s);
+      });
+    } else {
+      const s = document.createElement('div'); s.className = 'swiper-slide';
+      s.innerHTML = '<div class="exp-ph">// imágenes próximamente</div>';
+      wrap.appendChild(s);
+    }
+    $('expNav').classList.toggle('is-single', imgs.length < 2);
+
+    swiper && swiper.destroy(true, true);
+    swiper = new Swiper(modal.querySelector('.expSwiper'), {
+      slidesPerView: 1,
+      speed: 600,
+      grabCursor: true,
+      keyboard: { enabled: true },
+      pagination: { el: modal.querySelector('.exp-pagination'), clickable: true },
+      navigation: { nextEl: modal.querySelector('.exp-next'), prevEl: modal.querySelector('.exp-prev') }
+    });
+
+    lastFocus = trigger || document.activeElement;
+    isOpen = true;
+    modal.setAttribute('aria-hidden', 'false');
+    modal.style.visibility = 'visible';
+    document.body.style.overflow = 'hidden';
+    panel.scrollTop = 0;
+    modal.querySelector('.exp-modal__info').scrollTop = 0;
+
+    gsap.killTweensOf([panel, backdrop]);
+    gsap.fromTo(backdrop, { opacity: 0 }, { opacity: 1, duration: .3 });
+    gsap.fromTo(panel, { opacity: 0, y: 50, scale: .97 }, { opacity: 1, y: 0, scale: 1, duration: .5, ease: 'power3.out' });
+    modal.querySelector('.exp-modal__close').focus({ preventScroll: true });
+  }
+
+  function close() {
+    if (!isOpen) return;
+    isOpen = false;
+    modal.setAttribute('aria-hidden', 'true');
+    gsap.killTweensOf([panel, backdrop]);
+    gsap.to(panel, { opacity: 0, y: 30, duration: .25, ease: 'power2.in' });
+    gsap.to(backdrop, {
+      opacity: 0, duration: .3,
+      onComplete: () => {
+        modal.style.visibility = 'hidden';
+        swiper && swiper.destroy(true, true); swiper = null;
+        document.body.style.overflow = '';
+        lastFocus && lastFocus.focus({ preventScroll: true });
+      }
+    });
+  }
+
+  modal.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', close));
+  window.addEventListener('keydown', e => { if (e.key === 'Escape' && isOpen) close(); });
+})();
+</script>
+
+<div class="gtranslate_wrapper" id="gtranslate_wrapper" aria-hidden="true" style="position:absolute;left:-9999px;top:0;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;"></div>
+<script>
+window.gtranslateSettings = {
+  default_language: "es",
+  languages: ["es", "en", "fr", "de", "it", "pt", "ja", "ko", "zh-CN"],
+  wrapper_selector: ".gtranslate_wrapper"
+};
+</script>
+<script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+<script>
+(() => {
+  const picker = document.getElementById("languagePicker");
+  const trigger = document.getElementById("languageTrigger");
+  const menu = document.getElementById("languageMenu");
+  const burger = document.getElementById("burger");
+  if (!picker || !trigger || !menu) return;
+
+  const options = [...menu.querySelectorAll(".language-option")];
+  const label = trigger.querySelector(".language-trigger-label");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const hireLink = document.querySelector('header a[href="#contact"]');
+  let isOpen = false;
+
+  document.body.appendChild(menu);
+  menu.setAttribute("translate", "no");
+
+  picker.style.setProperty("position", "fixed");
+  picker.style.setProperty("z-index", "131");
+  picker.style.setProperty("color", "#fff");
+  picker.style.setProperty("mix-blend-mode", "difference");
+
+  menu.style.setProperty("position", "fixed");
+  menu.style.setProperty("z-index", "140");
+  menu.style.setProperty("mix-blend-mode", "normal");
+  menu.style.setProperty("background", "#090909", "important");
+
+  function vw() {
+    return document.documentElement.clientWidth;
+  }
+
+  function placePicker() {
+    if (!burger) return;
+    const b = burger.getBoundingClientRect();
+    const hireVisible = hireLink && getComputedStyle(hireLink).display !== "none";
+    const anchor = hireVisible ? hireLink.getBoundingClientRect() : b;
+    picker.style.top = (b.top + (b.height - 46) / 2) + "px";
+    picker.style.right = (vw() - anchor.left + 16) + "px";
+  }
+
+  function placeMenu() {
+    const r = trigger.getBoundingClientRect();
+    menu.style.top = (r.bottom + 10) + "px";
+    menu.style.right = (vw() - r.right) + "px";
+  }
+
+  function placeAll() {
+    placePicker();
+    if (isOpen) {
+      trigger.style.width = (window.innerWidth <= 640 ? 165 : 190) + "px";
+      placeMenu();
+    }
+  }
+
+  function markSelected(lang) {
+    options.forEach(option => {
+      const selected = option.dataset.lang === lang;
+      option.classList.toggle("is-selected", selected);
+      option.setAttribute("aria-selected", String(selected));
+    });
+    const selectedOption = options.find(option => option.dataset.lang === lang);
+    if (selectedOption && label) {
+      label.textContent = selectedOption.querySelector("span:last-child").textContent.trim();
+    }
+  }
+
+  function setMenuVisible(open) {
+    menu.style.visibility = open ? "visible" : "hidden";
+    menu.style.pointerEvents = open ? "auto" : "none";
+  }
+
+  function animateOpen(open) {
+    isOpen = open;
+    picker.classList.toggle("is-open", open);
+    trigger.setAttribute("aria-expanded", String(open));
+    trigger.setAttribute("aria-label", open ? "Cerrar selector de idioma" : "Seleccionar idioma");
+
+    if (open) placePicker();
+
+    if (!window.gsap || reducedMotion) {
+      trigger.style.width = open ? (window.innerWidth <= 640 ? "165px" : "190px") : "46px";
+      if (open) placeMenu();
+      menu.style.opacity = open ? "1" : "0";
+      menu.style.transform = open ? "translateY(0) scale(1)" : "translateY(-6px) scale(.98)";
+      setMenuVisible(open);
+      return;
+    }
+
+    gsap.killTweensOf([trigger, menu]);
+    if (open) {
+      placeMenu();
+      setMenuVisible(true);
+      gsap.to(trigger, {
+        width: window.innerWidth <= 640 ? 165 : 190,
+        duration: 0.32,
+        ease: "power3.out",
+        overwrite: true
+      });
+      gsap.fromTo(menu,
+        { autoAlpha: 0, y: -8, scale: 0.97 },
+        { autoAlpha: 1, y: 0, scale: 1, duration: 0.28, ease: "power2.out", overwrite: true }
+      );
+    } else {
+      gsap.to(menu, {
+        autoAlpha: 0,
+        y: -6,
+        scale: 0.98,
+        duration: 0.18,
+        ease: "power2.in",
+        onComplete: () => { if (!isOpen) setMenuVisible(false); }
+      });
+      gsap.to(trigger, {
+        width: 46,
+        duration: 0.3,
+        ease: "power3.inOut",
+        overwrite: true
+      });
+    }
+  }
+
+  function selectLanguage(lang) {
+    const nativeSelect = document.querySelector(
+      "#gtranslate_wrapper select, .gtranslate_wrapper select, select.gt_selector"
+    );
+
+    if (nativeSelect) {
+      const target = [...nativeSelect.options].find(option => {
+        const value = option.value.trim();
+        const parts = value.split("|").map(part => part.trim());
+
+        if (lang === "es") {
+          return value === "es|es" || parts[0] === "es" && parts[1] === "es";
+        }
+
+        return value === "es|" + lang || parts[1] === lang || value === lang;
+      });
+
+      if (target) {
+        nativeSelect.value = target.value;
+        nativeSelect.dispatchEvent(new Event("change", { bubbles: true }));
+        markSelected(lang);
+        animateOpen(false);
+        return;
+      }
+    }
+
+    if (typeof window.doGTranslate === "function") {
+      window.doGTranslate("es|" + lang);
+      markSelected(lang);
+      animateOpen(false);
+      return;
+    }
+
+    console.warn("GTranslate todavía no está listo o no ofrece el idioma:", lang);
+  }
+
+  trigger.addEventListener("click", () => animateOpen(!isOpen));
+  options.forEach(option => option.addEventListener("click", () => selectLanguage(option.dataset.lang)));
+
+  document.addEventListener("click", event => {
+    if (isOpen && !picker.contains(event.target) && !menu.contains(event.target)) animateOpen(false);
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && isOpen) {
+      animateOpen(false);
+      trigger.focus();
+    }
+  });
+
+  window.addEventListener("resize", placeAll);
+  window.addEventListener("load", placeAll);
+
+  if (window.ResizeObserver) new ResizeObserver(placeAll).observe(document.documentElement);
+
+  markSelected("es");
+  setMenuVisible(false);
+  menu.style.opacity = "0";
+  trigger.style.width = "46px";
+  placePicker();
+})();
+</script>
 </body>
 </html>
