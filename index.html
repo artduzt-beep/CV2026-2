@@ -406,7 +406,15 @@ tailwind.config = { theme: { extend: {
   const modal = document.getElementById('expModal');
   if (!modal) return;
   const EXP = [
-    { images: ['./assets/experience/Agora_process.png', './assets/experience/VyM_process.png', './assets/experience/Innov_process.png', './assets/experience/Guardianes_process.png'] },
+    {
+      images: ['./assets/experience/Agora_process.png', './assets/experience/VyM_process.png', './assets/experience/Innov_process.png', './assets/experience/Guardianes_process.png'],
+      urls: [
+        'https://www.movil.gs/agora-2-0/index/',
+        'https://www.movil.gs/gruposalinas/mgs20094/',
+        'https://www.movil.gs/innovacion-2026/',
+        'https://www.movil.gs/culturaparati/guardianes-del-conocimiento/melody/cancionesalegres/'
+      ]
+    },
     { images: ['./assets/img/exp/dulce-1.jpg'] },
     { images: [] },
     { images: ['./assets/img/exp/suzuki-1.jpg', './assets/img/exp/suzuki-2.jpg'] },
@@ -459,8 +467,13 @@ tailwind.config = { theme: { extend: {
     });
 
     const link = $('expModalLink');
-    link.hidden = !d.url;
-    if (d.url) link.href = d.url;
+    const slideUrls = d.urls || [];
+    const updateLink = index => {
+      const url = slideUrls[index] || d.url;
+      link.hidden = !url;
+      if (url) link.href = url;
+    };
+    updateLink(0);
 
     const wrap = $('expSlides'); wrap.innerHTML = '';
     const imgs = d.images || [];
@@ -484,7 +497,12 @@ tailwind.config = { theme: { extend: {
       grabCursor: true,
       keyboard: { enabled: true },
       pagination: { el: modal.querySelector('.exp-pagination'), clickable: true },
-      navigation: { nextEl: modal.querySelector('.exp-next'), prevEl: modal.querySelector('.exp-prev') }
+      navigation: { nextEl: modal.querySelector('.exp-next'), prevEl: modal.querySelector('.exp-prev') },
+      on: {
+        slideChange(instance) {
+          updateLink(instance.realIndex);
+        }
+      }
     });
 
     lastFocus = trigger || document.activeElement;
