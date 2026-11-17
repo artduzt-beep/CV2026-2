@@ -727,6 +727,7 @@ header.fixed .language-trigger:hover {
 .exp-modal__media {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   min-width: 0;
   min-height: 0;
   background: #0d0d0d;
@@ -734,8 +735,10 @@ header.fixed .language-trigger:hover {
 }
 .exp-modal__stage { 
   position: relative; 
-  flex: 1; 
+  flex: none;
+  width: 100%;
   min-height: 0; 
+  aspect-ratio: 1746 / 901;
 }
 
 .expSwiper { 
@@ -907,7 +910,6 @@ header.fixed .language-trigger:hover {
 
   .exp-modal__stage { 
     flex: none; 
-    aspect-ratio: 4 / 3; 
   }
   .exp-modal__info { 
     overflow: visible; 
