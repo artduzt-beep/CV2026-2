@@ -413,6 +413,12 @@ tailwind.config = { theme: { extend: {
         'https://www.movil.gs/gruposalinas/mgs20094/',
         'https://www.movil.gs/innovacion-2026/',
         'https://www.movil.gs/culturaparati/guardianes-del-conocimiento/melody/cancionesalegres/'
+      ],
+      urlLabels: [
+        'Conoce Ágora',
+        'Conoce Vida & Movimiento',
+        'Conoce Innovación 2026',
+        'Conoce Guardianes'
       ]
     },
     { images: ['./assets/img/exp/dulce-1.jpg'] },
@@ -468,10 +474,12 @@ tailwind.config = { theme: { extend: {
 
     const link = $('expModalLink');
     const slideUrls = d.urls || [];
+    const urlLabels = d.urlLabels || [];
     const updateLink = index => {
       const url = slideUrls[index] || d.url;
       link.hidden = !url;
       if (url) link.href = url;
+      link.textContent = urlLabels[index] ? `${urlLabels[index]} →` : 'Ver caso completo →';
     };
     updateLink(0);
 
